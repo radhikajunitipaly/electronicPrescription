@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "605031514791",
-    "firebase_url": "https://eprescription-a84af.firebaseio.com",
-    "project_id": "eprescription-a84af",
-    "storage_bucket": "eprescription-a84af.appspot.com"
+    "project_number": "25392267711",
+    "firebase_url": "https://eprescription-25c5c.firebaseio.com",
+    "project_id": "eprescription-25c5c",
+    "storage_bucket": "eprescription-25c5c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:605031514791:android:f7c2cab9a366f131",
+        "mobilesdk_app_id": "1:25392267711:android:f7c2cab9a366f131",
         "android_client_info": {
           "package_name": "com.uta.eprescription"
         }
       },
       "oauth_client": [
         {
-          "client_id": "605031514791-638h31r8nl8520r2aq3sdccrpec681uh.apps.googleusercontent.com",
+          "client_id": "25392267711-985i7trtbn4lde5bf2cghrg7s7co8hgl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uta.eprescription",
+            "certificate_hash": "320f1ed3e8f5a583bd98ebc9df8401dbee3c775a"
+          }
+        },
+        {
+          "client_id": "25392267711-0ivtjnltolo7vrg44102pvqreo6g99al.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDYNEVl8ll8Mxgp6VlErGqmOz8lOAKy7RU"
+          "current_key": "AIzaSyBeB5F-2wfjoFq-GXg1lizjSrw2pjUAncQ"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25392267711-0ivtjnltolo7vrg44102pvqreo6g99al.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

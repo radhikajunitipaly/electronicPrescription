@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("testsDatabase");
+        databaseReference = FirebaseDatabase.getInstance().getReference("doctor");
 
         Button btn = (Button)findViewById(R.id.button_sign_in);
         final EditText txtname = (EditText)findViewById(R.id.User_id);
@@ -68,18 +68,18 @@ public class MainActivity extends AppCompatActivity {
         String email = editTextUserEmail.getText().toString().trim();*/
 
         String name = "Radhika";
-        String type = "Doctor";
-        String email = "radhikaemail@doctor.com";
+        String type = "Pharmacist";
+        String email = "deepikas@pharmacists.com";
 
 
         if(!TextUtils.isEmpty(email)) {
             String id = databaseReference.push().getKey();
-
+            System.out.println("User id being added is : "+id);
             TestDatabase user = new TestDatabase(id, name, email, type);
-
+            System.out.println("User being added is : "+user.getId()+ " "+user.getUserName()+ " "+user.getUserEmailId());
             databaseReference.child(id).setValue(user);
 
-            Toast.makeText(this, "User added", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "User added finally", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "The email Id field cannot be empty!!", Toast.LENGTH_SHORT ).show();
         }
