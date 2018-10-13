@@ -8,7 +8,7 @@
     android:maxWidth="400dp"
     android:minHeight="0dp"
     android:minWidth="0dp"
-    tools:context=".MainActivity">
+    tools:context=".activities.authenticationMgr.MainActivity">
 
     <TextView
         android:id="@+id/textView"

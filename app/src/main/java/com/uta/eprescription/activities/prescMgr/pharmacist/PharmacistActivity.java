@@ -1,9 +1,11 @@
-package com.uta.eprescription;
+package com.uta.eprescription.activities.prescMgr.pharmacist;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Pharmacist_page extends AppCompatActivity {
+import com.uta.eprescription.R;
+
+public class PharmacistActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

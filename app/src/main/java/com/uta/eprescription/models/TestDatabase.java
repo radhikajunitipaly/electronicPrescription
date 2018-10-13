@@ -1,7 +1,8 @@
-package com.uta.eprescription.authenticationMgr;
+package com.uta.eprescription.models;
 
-public class User {
+public class TestDatabase {
 
+    String id;
     String userName;
     String userEmailId;
     /*String userId;*/
@@ -9,17 +10,22 @@ public class User {
     /*String userGender;
     String password;*/
 
-    public User() {
+    public TestDatabase() {
 
     }
 
-    public User(String userName, String userEmailId/*, String userId*/, String userType/*, String userGender, String password*/) {
+    public TestDatabase(String id, String userName, String userEmailId/*, String userId*/, String userType/*, String userGender, String password*/) {
+        this.id = id;
         this.userName = userName;
         this.userEmailId = userEmailId;
         /*this.userId = userId;*/
         this.userType = userType;
         /*this.userGender = userGender;
         this.password = password;*/
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getUserName() {

@@ -1,4 +1,4 @@
-package com.uta.eprescription;
+package com.uta.eprescription.activities.authenticationMgr;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,10 +15,10 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.FirebaseDatabase;
-import com.uta.eprescription.Doctor_page;
-import com.uta.eprescription.Pharmacist_page;
-import com.uta.eprescription.authenticationMgr.TestDatabase;
-import com.uta.eprescription.authenticationMgr.User;
+import com.uta.eprescription.R;
+import com.uta.eprescription.models.TestDatabase;
+import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
+import com.uta.eprescription.activities.prescMgr.pharmacist.PharmacistActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addUser();
                 if(txtname.getText().toString().equals("doctor") && pass.getText().toString().equals("password")) {
-                    startActivity(new Intent(MainActivity.this, Doctor_page.class)); }
+                    startActivity(new Intent(MainActivity.this, DoctorActivity.class)); }
                 else if(txtname.getText().toString().equals("pharmacist") && pass.getText().toString().equals("password")){
-                    startActivity(new Intent(MainActivity.this, Pharmacist_page.class));
+                    startActivity(new Intent(MainActivity.this, PharmacistActivity.class));
                 }
                 else{
                     AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();

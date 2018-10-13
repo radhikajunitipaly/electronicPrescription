@@ -10,15 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.authenticationMgr.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Doctor_page" />
-        <activity android:name=".Pharmacist_page"></activity>
+        <activity android:name=".activities.prescMgr.doctor.DoctorActivity" />
+        <activity android:name=".activities.prescMgr.pharmacist.PharmacistActivity"></activity>
     </application>
 
 </manifest>
