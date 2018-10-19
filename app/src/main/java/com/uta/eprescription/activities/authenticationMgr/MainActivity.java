@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                     alert.show();
                 }
             }
-
         });
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,7 +3,7 @@ package com.uta.eprescription.models;
 public class User {
 
     String userId;
-    String userPassword;
+    String password;
     String firstName;
     String lastName;
     String emailId;
@@ -11,7 +11,7 @@ public class User {
 
     public User(String userId, String userPassword,String emailId, String firstName, String lastName,String userType) {
         this.userId = userId;
-        this.userPassword =userPassword;
+        this.password =userPassword;
         this.emailId = emailId;
         this.userType = userType;
         this.firstName = firstName;
@@ -26,12 +26,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -64,5 +64,11 @@ public class User {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public boolean authorizedUser(String userId, String password) {
+        if(this.userId == userId && this.password == password)
+            return true;
+        return false;
     }
 }
