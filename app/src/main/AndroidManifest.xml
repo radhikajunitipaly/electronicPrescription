@@ -18,9 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.prescMgr.doctor.DoctorActivity" android:label="Home"/>
+        <activity
+            android:name=".activities.prescMgr.doctor.DoctorActivity"
+            android:label="Home" />
         <activity android:name=".activities.prescMgr.pharmacist.PharmacistActivity" />
-        <activity android:name=".activities.prescMgr.patient.PatientActivity"></activity>
+        <activity android:name=".activities.prescMgr.patient.PatientActivity" />
+        <activity android:name=".activities.authenticationMgr.RegisterUserActivity"></activity>
     </application>
 
 </manifest>

@@ -2,47 +2,67 @@ package com.uta.eprescription.models;
 
 public class User {
 
-    String userName;
-    String userEmailId;
-    /*String userId;*/
+    String userId;
+    String userPassword;
+    String firstName;
+    String lastName;
+    String emailId;
     String userType;
-    /*String userGender;
-    String password;*/
 
-    public User() {
-
-    }
-
-    public User(String userName, String userEmailId/*, String userId*/, String userType/*, String userGender, String password*/) {
-        this.userName = userName;
-        this.userEmailId = userEmailId;
-        /*this.userId = userId;*/
+    public User(String userId, String userPassword,String emailId, String firstName, String lastName,String userType) {
+        this.userId = userId;
+        this.userPassword =userPassword;
+        this.emailId = emailId;
         this.userType = userType;
-        /*this.userGender = userGender;
-        this.password = password;*/
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getUserEmailId() {
-        return userEmailId;
-    }
-
-   /* public String getUserId() {
+    public String getUserId() {
         return userId;
-    }*/
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
     public String getUserType() {
         return userType;
     }
 
-  /*  public String getUserGender() {
-        return userGender;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
-
-    public String getPassword() {
-        return password;
-    }*/
 }
