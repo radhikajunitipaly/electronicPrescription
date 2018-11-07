@@ -14,7 +14,6 @@ import com.uta.eprescription.activities.prescMgr.patient.PatientActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
 import com.uta.eprescription.activities.prescMgr.pharmacist.PharmacistActivity;
-import com.uta.eprescription.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,42 +22,57 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button signInButton = (Button) findViewById(R.id.button_sign_in);
-        Button registerButton = (Button) findViewById(R.id.button2);
-        final EditText userId = (EditText) findViewById(R.id.User_id);
-        final EditText password = (EditText) findViewById(R.id.login_password);
+        final EditText userIdField = (EditText) findViewById(R.id.User_id);
+        final EditText passwordField = (EditText) findViewById(R.id.login_password);
+
         signInButton.setOnClickListener(new View.OnClickListener() {
-            UserDao userDao = new UserDao();
-            User user = userDao.getUser("sxt8113");
             @Override
-            public void onClick(View v) {
-                if(userId.getText().toString().equals("Doctor") && password.getText().toString().equals("password")) {
-                    startActivity(new Intent(MainActivity.this, DoctorActivity.class)); }
-                else if(userId.getText().toString().equals("Pharmacist") && password.getText().toString().equals("password")){
-                    startActivity(new Intent(MainActivity.this, PharmacistActivity.class));
-                }
-                else if(userId.getText().toString().equals("Student") && password.getText().toString().equals("password")) {
-                    startActivity(new Intent(MainActivity.this, PatientActivity.class));
-                }
-                else{
-                    AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
-                    alert.setTitle("Alert");
-                    alert.setMessage("Incorrect Username/Password");
-                    alert.setButton("OK", new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int which) {
-                            // TODO Auto-generated method stub
-
+            public void onClick(View view) {
+                UserDao userDao = new UserDao();
+                userDao.verifyUserIdAndPassword(new AuthenticationCallback<Boolean>() {
+                    @Override
+                    public void callback(boolean success, String userType) {
+                        if (success) {
+                            switch (userType) {
+                                case "doctor":
+                                    startActivity(new Intent(MainActivity.this,
+                                            DoctorActivity.class));
+                                    break;
+                                case "pharmacist":
+                                    startActivity(new Intent(MainActivity.this,
+                                            PharmacistActivity.class));
+                                    break;
+                                case "student":
+                                    startActivity(new Intent(MainActivity.this,
+                                            PatientActivity.class));
+                                    break;
+                                default:
+                                    AlertDialog alert = new AlertDialog.Builder(
+                                            MainActivity.this).create();
+                                    alert.setTitle("Alert");
+                                    alert.setMessage("Error occurred while fetching user, " +
+                                            "please contact administrator");
+                                    alert.setButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                                    alert.show();
+                            }
+                        } else {
+                            AlertDialog alert = new AlertDialog.Builder(
+                                    MainActivity.this).create();
+                            alert.setTitle("Alert");
+                            alert.setMessage("Incorrect userId/password");
+                            alert.setButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                            alert.show();
                         }
-                    });
-                    alert.show();
-                }
-            }
-        });
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RegisterUserActivity.class));
+                    }
+                }, userIdField.getText().toString(), passwordField.getText().toString());
             }
         });
     }
 }
+

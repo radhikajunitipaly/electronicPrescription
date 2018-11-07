@@ -9,6 +9,9 @@ public class User {
     String emailId;
     String userType;
 
+    public User(){
+
+    }
     public User(String userId, String userPassword,String emailId, String firstName, String lastName,String userType) {
         this.userId = userId;
         this.password =userPassword;

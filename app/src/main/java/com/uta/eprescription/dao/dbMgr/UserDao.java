@@ -1,51 +1,62 @@
 package com.uta.eprescription.dao.dbMgr;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uta.eprescription.activities.authenticationMgr.AuthenticationCallback;
 import com.uta.eprescription.models.User;
 
 public class UserDao {
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-    User user;
+    // for data persistence
+    FirebaseDatabase database = Utils.getDatabase();
+    DatabaseReference databaseReference = database.getReference("Users");
+    boolean success;
+    String userType;
 
     public void addUser(User user) {
         if (!TextUtils.isEmpty(user.getUserId())) {
-            databaseReference.child(user.getUserId()).setValue(user);
+            databaseReference.child("user").setValue(user);
         } else {
             //uncomment below line when register User Activity is ready and pass it's context to this method while adding user
             // Toast.makeText(registerUserActivityContext, "The User Id field cannot be empty!!", Toast.LENGTH_SHORT ).show();
         }
     }
 
-    public void updateUser(User user) {
-        if (!TextUtils.isEmpty(user.getUserId())) {
-            databaseReference.child(user.getUserId()).setValue(user);
-        } else {
-            //uncomment below line when Update User Activity is ready and pass it's context to this method while updating user
-           // Toast.makeText(UpdateUserActivityContext, "The User Id field cannot be empty!!", Toast.LENGTH_SHORT ).show();
-        }
-    }
-
-    public User getUser(final String userId) {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+    public void verifyUserIdAndPassword(@NonNull final AuthenticationCallback<Boolean> finishedCallback,
+                                        final String loginId, final String loginPassword){
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                user = dataSnapshot.child(userId).getValue(User.class);
-
+                if( dataSnapshot.hasChild(loginId) ) {
+                    DataSnapshot user = dataSnapshot.child(loginId);
+                    if((user.child("password").getValue(String.class)).equals(loginPassword)) {
+                        userType = user.child("userType").getValue(String.class);
+                        success = true;
+                    }
+                }
+                finishedCallback.callback(success, userType);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("UserListActivity", "Error occurred");
-                // Do something about the error
-                //uncomment below line when the Activities are ready and pass specific context to this method while getting user
-                // Toast.makeText(specificActivity, "Error occurred while fetching the user", Toast.LENGTH_SHORT ).show();
+
             }
         });
-        return user;
     }
+}
+
+class Utils {
+    private static FirebaseDatabase mDatabase;
+
+    public static FirebaseDatabase getDatabase() {
+        if (mDatabase == null) {
+            mDatabase = FirebaseDatabase.getInstance();
+            mDatabase.setPersistenceEnabled(true);
+        }
+        return mDatabase;
+    }
+
 }
