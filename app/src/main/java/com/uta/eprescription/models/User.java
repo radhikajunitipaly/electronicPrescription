@@ -6,19 +6,21 @@ public class User {
     String password;
     String firstName;
     String lastName;
-    String emailId;
+    String Phone;
+    String DOB;
     String userType;
 
     public User(){
 
     }
-    public User(String userId, String userPassword,String emailId, String firstName, String lastName,String userType) {
+    public User(String userId, String userPassword,String Phone, String firstName, String lastName,String userType,String DOB) {
         this.userId = userId;
-        this.password =userPassword;
-        this.emailId = emailId;
+        this.password = userPassword;
+        this.Phone = Phone;
         this.userType = userType;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.DOB = DOB;
     }
 
     public String getUserId() {
@@ -53,14 +55,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
     public String getUserType() {
         return userType;
     }
@@ -69,9 +63,4 @@ public class User {
         this.userType = userType;
     }
 
-    public boolean authorizedUser(String userId, String password) {
-        if(this.userId == userId && this.password == password)
-            return true;
-        return false;
-    }
 }

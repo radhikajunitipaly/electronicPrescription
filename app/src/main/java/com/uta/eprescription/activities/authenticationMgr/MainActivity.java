@@ -35,15 +35,15 @@ public class MainActivity extends AppCompatActivity {
                     public void callback(boolean success, String userType) {
                         if (success) {
                             switch (userType) {
-                                case "doctor":
+                                case "Doctor":
                                     startActivity(new Intent(MainActivity.this,
                                             DoctorActivity.class));
                                     break;
-                                case "pharmacist":
+                                case "Pharmacist":
                                     startActivity(new Intent(MainActivity.this,
                                             PharmacistActivity.class));
                                     break;
-                                case "student":
+                                case "Student":
                                     startActivity(new Intent(MainActivity.this,
                                             PatientActivity.class));
                                     break;

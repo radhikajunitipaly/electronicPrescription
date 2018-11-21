@@ -1,12 +1,17 @@
 package com.uta.eprescription.activities.authenticationMgr;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.User;
 
@@ -17,16 +22,55 @@ public class RegisterUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
         Button Btn_register = (Button)findViewById(R.id.registerButton);
+        Button Btn_cancel = (Button)findViewById(R.id.Cancel);
+
         Btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User("sxt8117", "password", "shakthi@prakash",
-                        "Shakti","prakash", "pharmacist");
-                UserDao userDao = new UserDao();
-                userDao.addUser(user);
-                Toast.makeText(RegisterUserActivity.this, "User Registered!",
+                final EditText UserID = (EditText)findViewById( R.id.UserIDText );
+                final  EditText pass = (EditText)findViewById( R.id.UserPassword );
+                final EditText LastName = (EditText)findViewById( R.id.Lname );
+                final EditText FirstName = (EditText)findViewById( R.id.Fname );
+                final EditText DOB = (EditText)findViewById( R.id.DOB );
+                final EditText phone = (EditText)findViewById( R.id.Phone ) ;
+                final RadioGroup rdgrp = (RadioGroup)findViewById( R.id.RadioGrp );
+                int selectedId = rdgrp.getCheckedRadioButtonId();
+                final  RadioButton selectedRadio = (RadioButton)findViewById( selectedId);
+
+               User user = new User(UserID.getText().toString(),pass.getText().toString(),phone.getText().toString(),FirstName.getText().toString(),LastName.getText().toString(),selectedRadio.getText().toString(),DOB.getText().toString());
+                //User user = new User("shakthi","password","wwrrr","sss","ssss","doc","fff");
+               UserDao userDao = new UserDao();
+               userDao.addUser(user);
+                Toast.makeText(RegisterUserActivity.this,"User Registered",
                         Toast.LENGTH_LONG).show();
+                startActivity(new Intent(RegisterUserActivity.this,
+                        MainActivity.class));
             }
         });
+
+
+        Btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText UserID = (EditText)findViewById( R.id.UserIDText );
+                final  EditText pass = (EditText)findViewById( R.id.UserPassword );
+                final EditText LastName = (EditText)findViewById( R.id.Lname );
+                final EditText FirstName = (EditText)findViewById( R.id.Fname );
+                final EditText DOB = (EditText)findViewById( R.id.DOB );
+                final EditText phone = (EditText)findViewById( R.id.Phone ) ;
+                final RadioGroup rdgrp = (RadioGroup)findViewById( R.id.RadioGrp );
+                int selectedId = rdgrp.getCheckedRadioButtonId();
+                final  RadioButton selectedRadio = (RadioButton)findViewById( selectedId);
+                UserID.setText("");
+                pass.setText("");
+                LastName.setText("");
+                FirstName.setText("");
+                DOB.setText("");
+                phone.setText("");
+                rdgrp.clearCheck();
+                }
+        });
+
+
     }
 }
