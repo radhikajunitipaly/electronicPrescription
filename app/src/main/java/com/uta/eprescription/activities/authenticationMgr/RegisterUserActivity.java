@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.uta.eprescription.R;
 import com.uta.eprescription.dao.dbMgr.UserDao;
@@ -19,10 +20,12 @@ public class RegisterUserActivity extends AppCompatActivity {
         Btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User("sxt8114", "password", "shakthi@prakash",
-                        "Shakti","prakash", "doctor");
+                User user = new User("sxt8117", "password", "shakthi@prakash",
+                        "Shakti","prakash", "pharmacist");
                 UserDao userDao = new UserDao();
                 userDao.addUser(user);
+                Toast.makeText(RegisterUserActivity.this, "User Registered!",
+                        Toast.LENGTH_LONG).show();
             }
         });
     }

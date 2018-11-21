@@ -19,7 +19,7 @@ public class UserDao {
 
     public void addUser(User user) {
         if (!TextUtils.isEmpty(user.getUserId())) {
-            databaseReference.child("user").setValue(user);
+            databaseReference.child(user.getUserId()).setValue(user);
         } else {
             //uncomment below line when register User Activity is ready and pass it's context to this method while adding user
             // Toast.makeText(registerUserActivityContext, "The User Id field cannot be empty!!", Toast.LENGTH_SHORT ).show();

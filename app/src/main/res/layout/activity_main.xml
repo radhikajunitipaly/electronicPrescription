@@ -87,7 +87,7 @@
         app:barrierDirection="left" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/main_reg_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
