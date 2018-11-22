@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.prescMgr.common.ViewPrescription">
+
+    <TextView
+        android:id="@+id/textView_vwpres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:text="View Prescription"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/st_date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Start Date"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_vwpres" />
+
+    <TextView
+        android:id="@+id/exp_date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Expiry Date"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/st_date_view"
+        app:layout_constraintTop_toBottomOf="@+id/st_date_view" />
+
+    <TextView
+        android:id="@+id/textView_med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Medicine"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/exp_date_view"
+        app:layout_constraintTop_toBottomOf="@+id/exp_date_view" />
+
+    <TextView
+        android:id="@+id/textView_pwr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Power"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView_med"
+        app:layout_constraintTop_toBottomOf="@+id/textView_med" />
+
+    <TextView
+        android:id="@+id/textView_medcnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Medicine Count"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView_pwr"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pwr" />
+
+    <TextView
+        android:id="@+id/textView_sts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Status"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView_medcnt"
+        app:layout_constraintTop_toBottomOf="@+id/textView_medcnt"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/textView_data_st_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:text="10/30/2018"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/st_date_view"
+        app:layout_constraintStart_toEndOf="@+id/st_date_view"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/textView_data_exp_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11/10/2018"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/exp_date_view"
+        app:layout_constraintStart_toStartOf="@+id/textView_data_st_date"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/textView_dat_med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ibux"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView_med"
+        app:layout_constraintStart_toStartOf="@+id/textView_data_exp_date"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/textView_dat_pwr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="250mg"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView_pwr"
+        app:layout_constraintStart_toStartOf="@+id/textView_dat_med"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/textView_dat_medcnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:text="10"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView_medcnt"
+        app:layout_constraintStart_toStartOf="@+id/textView_dat_pwr"
+        android:editable="false"/>
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_sts" />
+
+    <Spinner
+        android:id="@+id/spinner_vw_status"
+        android:layout_width="250dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="false"
+        android:entries="@array/status_array"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView_sts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView_sts" />
+
+    <Button
+        android:id="@+id/button_edit_ps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Edit Prescription"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_back" />
+</android.support.constraint.ConstraintLayout>
