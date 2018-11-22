@@ -20,6 +20,14 @@ public class DoctorActivity extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Button prescriptionButton = (Button) findViewById(R.id.button_doc_ps1);
+        prescriptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DoctorActivity.this,
+                        ViewPrescription.class));
+            }
+        });
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
