@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -26,13 +25,9 @@ public class MainActivity extends AppCompatActivity {
         final EditText userIdField = (EditText) findViewById(R.id.User_id);
         final EditText passwordField = (EditText) findViewById(R.id.login_password);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        signInButton.setOnClickListener((view) -> {
                 UserDao userDao = new UserDao();
-                userDao.verifyUserIdAndPassword(new AuthenticationCallback<Boolean>() {
-                    @Override
-                    public void callback(boolean success, String userType) {
+                userDao.verifyUserIdAndPassword((boolean success, String userType) -> {
                         if (success) {
                             switch (userType) {
                                 case "Doctor":
@@ -70,16 +65,11 @@ public class MainActivity extends AppCompatActivity {
                             });
                             alert.show();
                         }
-                    }
                 }, userIdField.getText().toString(), passwordField.getText().toString());
-            }
         });
-        main_reg_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        main_reg_button.setOnClickListener((view) -> {
                 startActivity(new Intent(MainActivity.this,
                         RegisterUserActivity.class));
-            }
         });
 
     }
