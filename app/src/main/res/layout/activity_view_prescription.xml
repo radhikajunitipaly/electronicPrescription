@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.prescMgr.common.ViewPrescription">
+    android:weightSum="100"
+    tools:context=".activities.prescMgr.common.ViewPrescriptionActivity">
 
     <TextView
         android:id="@+id/textView_vwpres"
@@ -29,6 +30,7 @@
         android:text="Start Date"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:weightSum="70"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_vwpres" />
 
@@ -40,6 +42,7 @@
         android:text="Expiry Date"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:weightSum="70"
         app:layout_constraintStart_toStartOf="@+id/st_date_view"
         app:layout_constraintTop_toBottomOf="@+id/st_date_view" />
 
@@ -51,6 +54,7 @@
         android:text="Medicine"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:weightSum="70"
         app:layout_constraintStart_toStartOf="@+id/exp_date_view"
         app:layout_constraintTop_toBottomOf="@+id/exp_date_view" />
 
@@ -62,6 +66,7 @@
         android:text="Power"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:weightSum="70"
         app:layout_constraintStart_toStartOf="@+id/textView_med"
         app:layout_constraintTop_toBottomOf="@+id/textView_med" />
 
@@ -81,7 +86,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:editable="false"
         android:text="Status"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -92,47 +96,34 @@
         android:id="@+id/textView_data_st_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:editable="false"
         android:text="10/30/2018"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:weightSum="30"
         app:layout_constraintBaseline_toBaselineOf="@+id/st_date_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/textView_data_exp_date" />
 
     <EditText
         android:id="@+id/textView_data_exp_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:editable="false"
         android:text="11/10/2018"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:weightSum="30"
         app:layout_constraintBaseline_toBaselineOf="@+id/exp_date_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/textView_dat_med" />
 
     <EditText
         android:id="@+id/textView_dat_med"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:editable="false"
         android:text="Ibux"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_med"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.618"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/textView_dat_pwr" />
 
     <EditText
         android:id="@+id/textView_dat_pwr"
@@ -140,30 +131,29 @@
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:editable="false"
         android:text="250mg"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:weightSum="30"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_pwr"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintHorizontal_bias="0.722"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/textView_dat_medcnt"
         android:layout_width="29dp"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginBottom="69dp"
         android:clickable="false"
-        android:editable="false"
         android:text="10"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView_medcnt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:weightSum="30"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_vw_status"
+        app:layout_constraintStart_toStartOf="@+id/textView_dat_pwr"
+        app:layout_constraintTop_toBottomOf="@+id/textView_med" />
 
     <Button
         android:id="@+id/button_back"
@@ -196,4 +186,25 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/button_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_back" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="-9dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        tools:layout_editor_absoluteY="511dp" />
 </android.support.constraint.ConstraintLayout>

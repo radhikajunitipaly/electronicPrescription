@@ -48,10 +48,6 @@ public class DoctorActivity extends AppCompatActivity {
                                 recyclerView.setLayoutManager(new LinearLayoutManager(DoctorActivity.this));
                         }, studentId.getText().toString(), dob.getText().toString()
                 );
-
         });
-
-
     }
-
 }

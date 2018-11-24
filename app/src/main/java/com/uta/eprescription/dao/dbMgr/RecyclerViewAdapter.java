@@ -50,11 +50,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.parentLayout.setOnClickListener((view) -> {
             Intent intent = new Intent(mContext, ViewPrescriptionActivity.class);
+            intent.putExtra("userType", mContext.getClass().getSimpleName());
             intent.putExtra("medicine", mData.get(position).getMedicine());
             intent.putExtra("startDate", mData.get(position).getStartDate());
             intent.putExtra("endDate", mData.get(position).getEndDate());
             intent.putExtra("count", mData.get(position).getCount());
             intent.putExtra("power", mData.get(position).getPower());
+            intent.putExtra("status", mData.get(position).getStatus());
             mContext.startActivity(intent);
         });
 

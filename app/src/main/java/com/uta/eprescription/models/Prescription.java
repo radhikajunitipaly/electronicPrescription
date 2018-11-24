@@ -7,6 +7,7 @@ public class Prescription {
     private String startDate;
     private String endDate;
     private String count;
+    private String status;
 
     public String getPid() {
         return pid;
@@ -63,14 +64,22 @@ public class Prescription {
 
     }
     public Prescription(String medicine, String power,String startDate, String endDate,
-                        String count, String pid) {
+                        String count, String pid, String status) {
         this.medicine = medicine;
         this.power = power;
         this.startDate = startDate;
         this.endDate = endDate;
         this.count = count;
         this.pid = pid;
+        this.status = status;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
 
