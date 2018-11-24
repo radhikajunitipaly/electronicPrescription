@@ -11,7 +11,7 @@ import com.uta.eprescription.activities.authenticationMgr.AuthenticationCallback
 import com.uta.eprescription.activities.prescMgr.common.PrescriptionListCallback;
 import com.uta.eprescription.models.Prescription;
 import com.uta.eprescription.models.User;
-import  com.uta.eprescription.controllers.prescMgr.doctor.PrescriptionCountCall;
+import com.uta.eprescription.activities.prescMgr.doctor.PrescriptionCountCall;
 import java.util.ArrayList;
 
 public class UserDao {
@@ -95,21 +95,18 @@ public class UserDao {
                     DataSnapshot contentSnapshot = userSnapshot.child( "prescriptions" );
                     long childcount = contentSnapshot.getChildrenCount();
                     countofchild = childcount;
-
-
                 }
                 finishedCallback.callback( countofchild );
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 throw databaseError.toException(); // don't ignore errors
             }
         } );
     }
-    public void addPresc(String userId ,String pid,Prescription newPresc)
+    public void addPrescription(String userId, String pid, Prescription prescription)
     {
-        databaseReference.child( userId ).child( "prescriptions" ).child( pid ).setValue( newPresc );
+        databaseReference.child( userId ).child( "prescriptions" ).child( pid ).setValue( prescription );
     }
 
 }
