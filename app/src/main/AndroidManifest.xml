@@ -23,7 +23,11 @@
             android:label="Home" />
         <activity android:name=".activities.prescMgr.pharmacist.PharmacistActivity" />
         <activity android:name=".activities.prescMgr.patient.PatientActivity" />
-        <activity android:name=".activities.authenticationMgr.RegisterUserActivity"></activity>
+        <activity android:name=".activities.authenticationMgr.RegisterUserActivity" />
+        <activity
+            android:name=".activities.prescMgr.common.ViewPrescriptionActivity"
+            android:label="ViewPrescriptionActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

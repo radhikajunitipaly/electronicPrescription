@@ -80,71 +80,90 @@
         android:id="@+id/textView_sts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="52dp"
+        android:editable="false"
         android:text="Status"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView_medcnt"
-        app:layout_constraintTop_toBottomOf="@+id/textView_medcnt"
-        android:editable="false"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView_medcnt" />
 
     <EditText
         android:id="@+id/textView_data_st_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:editable="false"
         android:text="10/30/2018"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/st_date_view"
-        app:layout_constraintStart_toEndOf="@+id/st_date_view"
-        android:editable="false"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/textView_data_exp_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:editable="false"
         android:text="11/10/2018"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/exp_date_view"
-        app:layout_constraintStart_toStartOf="@+id/textView_data_st_date"
-        android:editable="false"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/textView_dat_med"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:editable="false"
         android:text="Ibux"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_med"
-        app:layout_constraintStart_toStartOf="@+id/textView_data_exp_date"
-        android:editable="false"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.618"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/textView_dat_pwr"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:editable="false"
         android:text="250mg"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_pwr"
-        app:layout_constraintStart_toStartOf="@+id/textView_dat_med"
-        android:editable="false"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/textView_dat_medcnt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="29dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:clickable="false"
+        android:editable="false"
         android:text="10"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_medcnt"
-        app:layout_constraintStart_toStartOf="@+id/textView_dat_pwr"
-        android:editable="false"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_back"

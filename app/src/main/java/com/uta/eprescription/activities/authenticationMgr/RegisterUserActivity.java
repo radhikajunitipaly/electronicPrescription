@@ -13,7 +13,10 @@ import android.widget.Toast;
 import com.uta.eprescription.R;
 import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
+import com.uta.eprescription.models.Prescription;
 import com.uta.eprescription.models.User;
+
+import java.util.ArrayList;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
@@ -36,8 +39,12 @@ public class RegisterUserActivity extends AppCompatActivity {
                 final RadioGroup rdgrp = (RadioGroup)findViewById( R.id.RadioGrp );
                 int selectedId = rdgrp.getCheckedRadioButtonId();
                 final  RadioButton selectedRadio = (RadioButton)findViewById( selectedId);
+                final ArrayList<Prescription> prescriptionArrayList = new ArrayList<>();
 
-               User user = new User(UserID.getText().toString(),pass.getText().toString(),phone.getText().toString(),FirstName.getText().toString(),LastName.getText().toString(),selectedRadio.getText().toString(),DOB.getText().toString());
+               User user = new User(UserID.getText().toString(),pass.getText().toString(),
+                       phone.getText().toString(),FirstName.getText().toString(),
+                       LastName.getText().toString(),selectedRadio.getText().toString(),
+                       DOB.getText().toString(), prescriptionArrayList);
                 //User user = new User("shakthi","password","wwrrr","sss","ssss","doc","fff");
                UserDao userDao = new UserDao();
                userDao.addUser(user);

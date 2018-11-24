@@ -8,14 +8,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.uta.eprescription.activities.authenticationMgr.AuthenticationCallback;
+import com.uta.eprescription.activities.prescMgr.common.PrescriptionListCallback;
+import com.uta.eprescription.models.Prescription;
 import com.uta.eprescription.models.User;
+
+import java.util.ArrayList;
 
 public class UserDao {
     // for data persistence
     FirebaseDatabase database = Utils.getDatabase();
     DatabaseReference databaseReference = database.getReference("Users");
+
     boolean success;
     String userType;
+
+    final ArrayList<Prescription> userPrescriptions = new ArrayList<>();
 
     public void addUser(User user) {
         if (!TextUtils.isEmpty(user.getUserId())) {
@@ -28,6 +35,7 @@ public class UserDao {
 
     public void verifyUserIdAndPassword(@NonNull final AuthenticationCallback<Boolean> finishedCallback,
                                         final String loginId, final String loginPassword){
+        databaseReference.keepSynced(true);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -46,7 +54,36 @@ public class UserDao {
             }
         });
     }
+
+    public void getPrescriptionsOfUser(@NonNull final PrescriptionListCallback<ArrayList> finishedCallback,
+                                       final String userId, final String dob) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataSnapshot.getChildren();
+                if( dataSnapshot.hasChild(userId) ) {
+                    DataSnapshot userSnapshot = dataSnapshot.child(userId);
+                    if((userSnapshot.child("DOB").getValue(String.class)).equals(dob)) {
+                        DataSnapshot contentSnapshot = userSnapshot.child("prescriptions");
+                        Iterable<DataSnapshot>  prescriptionSnapshot = contentSnapshot.getChildren();
+                        for(DataSnapshot prescription : prescriptionSnapshot) {
+                            Prescription tempPrescription = prescription.getValue(Prescription.class);
+                            userPrescriptions.add(tempPrescription);
+                        }
+                    }
+                }
+                finishedCallback.callback(userPrescriptions);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException(); // don't ignore errors
+            }
+        });
+    }
 }
+
+
 
 class Utils {
     private static FirebaseDatabase mDatabase;
