@@ -27,7 +27,8 @@
         <activity
             android:name=".activities.prescMgr.common.ViewPrescriptionActivity"
             android:label="ViewPrescriptionActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.prescMgr.doctor.CreatePrescriptionActivity"></activity>
     </application>
 
 </manifest>

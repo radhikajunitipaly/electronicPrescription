@@ -1,15 +1,19 @@
 package com.uta.eprescription.activities.prescMgr.doctor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.authenticationMgr.MainActivity;
+import com.uta.eprescription.activities.authenticationMgr.RegisterUserActivity;
 import com.uta.eprescription.dao.dbMgr.RecyclerViewAdapter;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
@@ -29,6 +33,7 @@ public class DoctorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_page);
         relativeLayout= findViewById(R.id.main_layout_doctor);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Button CreateNewPresc = (Button)findViewById( R.id.button_create );
 
         final EditText studentId = (EditText) findViewById(R.id.stid_ip_txt);
         final EditText dob = (EditText) findViewById(R.id.dob_ip_txt);
@@ -50,6 +55,15 @@ public class DoctorActivity extends AppCompatActivity {
                 );
 
         });
+
+        CreateNewPresc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DoctorActivity.this,
+                        CreatePrescriptionActivity.class));
+            }
+        });
+
 
 
     }
