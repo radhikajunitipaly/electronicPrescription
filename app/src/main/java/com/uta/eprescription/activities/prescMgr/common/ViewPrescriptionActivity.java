@@ -2,6 +2,7 @@ package com.uta.eprescription.activities.prescMgr.common;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,10 +39,14 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
         countField = findViewById(R.id.textView_dat_medcnt);
         powerField = findViewById(R.id.textView_dat_pwr);
         statusField = findViewById(R.id.spinner_vw_status);
+        Button savebtn = (Button)findViewById( R.id.button_save );
+        savebtn.setVisibility( View.INVISIBLE );
 
         getInComingIntent();
 
         editPrescriptionButton.setOnClickListener((view) -> {
+            editPrescriptionButton.setVisibility( View.INVISIBLE );
+            savebtn.setVisibility( View.VISIBLE );
                 if (userTypeToEdit.contains("Doctor")) {
                     editPrescriptionButton.setEnabled(true);
                     statusField.setEnabled(true);
