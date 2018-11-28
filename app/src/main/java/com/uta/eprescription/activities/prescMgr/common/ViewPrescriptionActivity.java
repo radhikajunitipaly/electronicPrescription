@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.prescMgr.doctor.CreatePrescriptionActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
 import com.uta.eprescription.models.User;
@@ -80,6 +82,8 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
             power = powerField.getText().toString();
             status = statusField.getSelectedItem().toString();
             displayPrescription();
+            Toast.makeText(ViewPrescriptionActivity.this,"Prescription Saved",
+                    Toast.LENGTH_LONG).show();
         });
     }
 
