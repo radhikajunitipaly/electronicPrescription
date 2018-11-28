@@ -1,5 +1,6 @@
 package com.uta.eprescription.activities.prescMgr.doctor;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.authenticationMgr.MainActivity;
+import com.uta.eprescription.activities.authenticationMgr.RegisterUserActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
 
@@ -49,6 +52,8 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
             },sid.getText().toString());
             Toast.makeText(CreatePrescriptionActivity.this,"Prescription created",
                     Toast.LENGTH_LONG).show();
+            startActivity(new Intent(CreatePrescriptionActivity.this,
+                    DoctorActivity.class));
         });
     }
 }
