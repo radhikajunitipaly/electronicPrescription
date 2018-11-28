@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Prescription> mData;
+    private String mUserId;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private AdapterView.OnItemLongClickListener mLongClickListener;
@@ -29,10 +30,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     // data is passed into the constructor
-    public RecyclerViewAdapter(Context context, ArrayList<Prescription> data) {
+    public RecyclerViewAdapter(Context context, ArrayList<Prescription> data, String userId) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.mContext = context;
+        this.mUserId= userId;
     }
 
     // inflates the row layout from xml when needed
@@ -50,6 +52,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.parentLayout.setOnClickListener((view) -> {
             Intent intent = new Intent(mContext, ViewPrescriptionActivity.class);
+            intent.putExtra("pid", entry.getPid());
+            intent.putExtra("userId", mUserId);
             intent.putExtra("userType", mContext.getClass().getSimpleName());
             intent.putExtra("medicine", mData.get(position).getMedicine());
             intent.putExtra("startDate", mData.get(position).getStartDate());
@@ -59,7 +63,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             intent.putExtra("status", mData.get(position).getStatus());
             mContext.startActivity(intent);
         });
-
     }
 
     // total number of rows

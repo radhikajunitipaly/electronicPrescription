@@ -40,7 +40,8 @@ public class PatientActivity extends AppCompatActivity {
                     (ArrayList prescriptionListTemp) -> {
                         prescriptionList = prescriptionListTemp;
                         recyclerView = findViewById(R.id.recycler_view);
-                        recyclerViewAdapter = new RecyclerViewAdapter(PatientActivity.this, prescriptionList);
+                        recyclerViewAdapter = new RecyclerViewAdapter(
+                                PatientActivity.this, prescriptionList, studentId.getText().toString());
                         recyclerView.setAdapter(recyclerViewAdapter);
                         recyclerView.addItemDecoration(new DividerItemDecoration(
                                 PatientActivity.this, DividerItemDecoration.VERTICAL));

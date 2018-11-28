@@ -4,21 +4,26 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.dao.dbMgr.UserDao;
+import com.uta.eprescription.models.Prescription;
+import com.uta.eprescription.models.User;
 
 public class ViewPrescriptionActivity extends AppCompatActivity {
 
     String userTypeToEdit;
-    TextView startDateField;
-    TextView endDateField;
-    TextView medicineField;
-    TextView countField;
-    TextView powerField;
+    EditText startDateField;
+    EditText endDateField;
+    EditText medicineField;
+    EditText countField;
+    EditText powerField;
     Spinner statusField;
     Button editPrescriptionButton;
+    Button saveButton;
 
     String status;
     String medicine;
@@ -39,14 +44,14 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
         countField = findViewById(R.id.textView_dat_medcnt);
         powerField = findViewById(R.id.textView_dat_pwr);
         statusField = findViewById(R.id.spinner_vw_status);
-        Button savebtn = (Button)findViewById( R.id.button_save );
-        savebtn.setVisibility( View.INVISIBLE );
+        saveButton = findViewById( R.id.button_save );
+        saveButton.setVisibility( View.INVISIBLE );
 
         getInComingIntent();
 
         editPrescriptionButton.setOnClickListener((view) -> {
             editPrescriptionButton.setVisibility( View.INVISIBLE );
-            savebtn.setVisibility( View.VISIBLE );
+            saveButton.setVisibility( View.VISIBLE );
                 if (userTypeToEdit.contains("Doctor")) {
                     editPrescriptionButton.setEnabled(true);
                     statusField.setEnabled(true);
@@ -60,9 +65,26 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
                     statusField.setEnabled(true);
                 }
         });
+
+        saveButton.setOnClickListener((view) -> {
+            UserDao userDao = new UserDao();
+            userDao.updatePrescription(getIntent().getStringExtra("userId"),
+                    getIntent().getStringExtra("pid"), new Prescription(medicineField.getText().toString(),
+                            powerField.getText().toString(), startDateField.getText().toString(),
+                            endDateField.getText().toString(), countField.getText().toString(),
+                            getIntent().getStringExtra("pid"),statusField.getSelectedItem().toString()));
+            medicine = medicineField.getText().toString();
+            startDate = startDateField.getText().toString();
+            endDate = endDateField.getText().toString();
+            count = countField.getText().toString();
+            power = powerField.getText().toString();
+            status = statusField.getSelectedItem().toString();
+            displayPrescription();
+        });
     }
 
     private void getInComingIntent() {
+
         if(getIntent().hasExtra("userType") && getIntent().hasExtra("medicine") &&
                 getIntent().hasExtra("startDate") &&
                 getIntent().hasExtra("endDate") && getIntent().hasExtra("count") &&
@@ -83,6 +105,8 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
 
     private void displayPrescription() {
 
+        editPrescriptionButton.setVisibility( View.VISIBLE );
+        saveButton.setVisibility( View.INVISIBLE );
         if(userTypeToEdit.contains("Pharmacist") || userTypeToEdit.contains("Doctor")) {
             editPrescriptionButton.setEnabled(true);
         } else if(userTypeToEdit.contains("Patient")) {

@@ -47,25 +47,20 @@ public class DoctorActivity extends AppCompatActivity {
                         (ArrayList prescriptionListTemp) -> {
                                 prescriptionList = prescriptionListTemp;
                                 recyclerView = findViewById(R.id.recycler_view);
-                                recyclerViewAdapter = new RecyclerViewAdapter(DoctorActivity.this, prescriptionList);
+                                recyclerViewAdapter = new RecyclerViewAdapter(
+                                        DoctorActivity.this, prescriptionList, studentId.getText().toString());
                                 recyclerView.setAdapter(recyclerViewAdapter);
-                                recyclerView.addItemDecoration(new DividerItemDecoration(DoctorActivity.this, DividerItemDecoration.VERTICAL));
+                                recyclerView.addItemDecoration(new DividerItemDecoration(DoctorActivity.this,
+                                        DividerItemDecoration.VERTICAL));
                                 recyclerView.setLayoutManager(new LinearLayoutManager(DoctorActivity.this));
                         }, studentId.getText().toString(), dob.getText().toString()
                 );
 
         });
 
-        CreateNewPresc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        CreateNewPresc.setOnClickListener((view) -> {
                 startActivity(new Intent(DoctorActivity.this,
                         CreatePrescriptionActivity.class));
-            }
         });
-
-
-
     }
-
 }

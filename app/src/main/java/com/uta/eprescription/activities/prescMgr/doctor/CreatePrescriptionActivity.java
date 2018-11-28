@@ -34,20 +34,23 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
         String formattedDate = df.format(c);
         date.setText( formattedDate );
         btn_save.setOnClickListener((view) -> {
-            final EditText edate = (EditText)findViewById( R.id.edate );
-            final EditText med  =   (EditText)findViewById( R.id.Med );
-            final EditText pow  = (EditText)findViewById( R.id.Power );
-            final EditText countmed = (EditText)findViewById( R.id.count ) ;
-            date.setText( formattedDate );
+
             final EditText sid = (EditText)findViewById( R.id.Studentid );
-            UserDao dbo = new UserDao();
-            dbo.getPrescriptionsOfUserCount( (Long count) -> {
-                count = count+1;
-                pidNew = p+count;
-                //Prescription newPrescription = new Prescription(med.getText().toString(),pow.getText().toString(),date.getText().toString(),edate.getText().toString(),countmed.getText().toString(),pidNew,"Valid");
-                Prescription newPrescription = new Prescription(med.getText().toString(),pow.getText().toString(),date.getText().toString(),edate.getText().toString(),countmed.getText().toString(),pidNew,"Valid" );
-                //Prescription newPrescription = new Prescription("med","12","12","12","12",pidNew,"valid" );
-                dbo.addPrescription( sid.getText().toString(),pidNew,newPrescription);
+
+                UserDao dbo = new UserDao();
+                dbo.getPrescriptionsOfUserCount( (Long count) -> {
+                    final EditText edate = (EditText)findViewById( R.id.edate );
+                    final EditText med  =   (EditText)findViewById( R.id.Med );
+                    final EditText pow  = (EditText)findViewById( R.id.Power );
+                    final EditText countmed = (EditText)findViewById( R.id.count ) ;
+                    date.setText( formattedDate );
+                        count = count+1;
+                        pidNew = p+count;
+                        Prescription newPrescription = new Prescription(med.getText().toString(),
+                                pow.getText().toString(), date.getText().toString(),
+                                edate.getText().toString(), countmed.getText().toString(),
+                                pidNew,"Valid");
+                        dbo.addPrescription( sid.toString(),pidNew,newPrescription);
                 },sid.getText().toString());
                 Toast.makeText(CreatePrescriptionActivity.this,"Prescription Saved",
                         Toast.LENGTH_LONG).show();
