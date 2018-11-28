@@ -49,7 +49,7 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
                 //Prescription newPrescription = new Prescription("med","12","12","12","12",pidNew,"valid" );
                 dbo.addPrescription( sid.getText().toString(),pidNew,newPrescription);
                 },sid.getText().toString());
-                Toast.makeText(CreatePrescriptionActivity.this,edate.getText().toString(),
+                Toast.makeText(CreatePrescriptionActivity.this,"Prescription Saved",
                         Toast.LENGTH_LONG).show();
         });
     }
