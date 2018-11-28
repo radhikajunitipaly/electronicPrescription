@@ -46,7 +46,10 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
                     date.setText( formattedDate );
                         count = count+1;
                         pidNew = p+count;
-                        Prescription newPrescription = new Prescription(med.getText().toString(),pow.getText().toString(),date.getText().toString(),edate.getText().toString(),countmed.getText().toString(),pidNew,"Valid");
+                        Prescription newPrescription = new Prescription(med.getText().toString(),
+                                pow.getText().toString(), date.getText().toString(),
+                                edate.getText().toString(), countmed.getText().toString(),
+                                pidNew,"Valid");
                         dbo.addPrescription( sid.toString(),pidNew,newPrescription);
                 },sid.getText().toString());
                 Toast.makeText(CreatePrescriptionActivity.this,"Prescription Saved",

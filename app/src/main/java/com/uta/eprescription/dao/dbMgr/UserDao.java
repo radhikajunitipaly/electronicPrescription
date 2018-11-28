@@ -104,8 +104,13 @@ public class UserDao {
             }
         } );
     }
-    public void addPrescription(String userId, String pid, Prescription prescription)
-    {
+
+    public void updatePrescription(String userId, String pid, Prescription prescription) {
+        databaseReference.child( userId ).child( "prescriptions" ).child( pid ).setValue( prescription );
+    }
+
+    public void addPrescription(String userId, String pid, Prescription prescription) {
+
         databaseReference.child( userId ).child( "prescriptions" ).child( pid ).setValue( prescription );
     }
 
