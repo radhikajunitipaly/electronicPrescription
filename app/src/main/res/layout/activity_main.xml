@@ -10,58 +10,41 @@
     android:minHeight="0dp"
     tools:context=".activities.authenticationMgr.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="150dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="35dp"
-        android:text="LOGIN"
-        android:textColor="@android:color/background_dark"
-        android:textSize="45sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/User_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintVertical_chainStyle="spread_inside"/>
-
     <EditText
         android:id="@+id/User_id"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
         android:textColorHighlight="@color/colorPrimaryDark"
-        android:backgroundTint="@color/colorPrimaryDark"
         android:textCursorDrawable="@null"
         android:textSize="24sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/login_password"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.635"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.478" />
 
     <EditText
         android:id="@+id/login_password"
         android:layout_width="202dp"
         android:layout_height="45dp"
         android:layout_marginEnd="3dp"
-        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:ems="10"
         android:hint="Password"
-        android:textColorHighlight="@color/colorPrimaryDark"
-        android:backgroundTint="@color/colorPrimaryDark"
         android:inputType="textPassword"
+        android:textColorHighlight="@color/colorPrimaryDark"
         android:textCursorDrawable="@null"
         android:textSize="24sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.653"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/User_id" />
 
@@ -78,7 +61,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/login_password"
+        />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier"
@@ -102,5 +86,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_sign_in"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/User_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uta_logo" />
 
 </android.support.constraint.ConstraintLayout>
