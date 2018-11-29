@@ -1,5 +1,6 @@
 package com.uta.eprescription.activities.prescMgr.patient;
 
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.authenticationMgr.MainActivity;
+import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
 import com.uta.eprescription.activities.prescMgr.pharmacist.PharmacistActivity;
 import com.uta.eprescription.dao.dbMgr.RecyclerViewAdapter;
 import com.uta.eprescription.dao.dbMgr.UserDao;
@@ -25,29 +29,34 @@ public class PatientActivity extends AppCompatActivity {
     ArrayList<Prescription> prescriptionList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_patient );
+        ImageButton logout = (ImageButton) findViewById( R.id.imageButton );
 
-        final EditText studentId = (EditText) findViewById(R.id.stid_ip_txt);
-        final EditText dob = (EditText) findViewById(R.id.dob_ip_txt);
+        final EditText studentId = (EditText) findViewById( R.id.stid_ip_txt );
+        final EditText dob = (EditText) findViewById( R.id.dob_ip_txt );
 
-        Button prescriptionButton = (Button) findViewById(R.id.button_srch);
+        Button prescriptionButton = (Button) findViewById( R.id.button_srch );
         prescriptionList = new ArrayList<>();
 
-        prescriptionButton.setOnClickListener((view) -> {
+        prescriptionButton.setOnClickListener( (view) -> {
             UserDao userDao = new UserDao();
             userDao.getPrescriptionsOfUser(
                     (ArrayList prescriptionListTemp) -> {
                         prescriptionList = prescriptionListTemp;
-                        recyclerView = findViewById(R.id.recycler_view);
+                        recyclerView = findViewById( R.id.recycler_view );
                         recyclerViewAdapter = new RecyclerViewAdapter(
-                                PatientActivity.this, prescriptionList, studentId.getText().toString());
-                        recyclerView.setAdapter(recyclerViewAdapter);
-                        recyclerView.addItemDecoration(new DividerItemDecoration(
-                                PatientActivity.this, DividerItemDecoration.VERTICAL));
-                        recyclerView.setLayoutManager(new LinearLayoutManager(PatientActivity.this));
+                                PatientActivity.this, prescriptionList, studentId.getText().toString() );
+                        recyclerView.setAdapter( recyclerViewAdapter );
+                        recyclerView.addItemDecoration( new DividerItemDecoration(
+                                PatientActivity.this, DividerItemDecoration.VERTICAL ) );
+                        recyclerView.setLayoutManager( new LinearLayoutManager( PatientActivity.this ) );
                     }, studentId.getText().toString(), dob.getText().toString()
             );
-        });
+        } );
+        logout.setOnClickListener( (view) -> {
+            startActivity( new Intent( PatientActivity.this,
+                    MainActivity.class ) );
+        } );
     }
 }

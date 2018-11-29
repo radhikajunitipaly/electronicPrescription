@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.uta.eprescription.R;
@@ -34,6 +35,7 @@ public class DoctorActivity extends AppCompatActivity {
         relativeLayout= findViewById(R.id.main_layout_doctor);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Button CreateNewPresc = (Button)findViewById( R.id.button_create );
+        ImageButton logout = (ImageButton)findViewById( R.id.imageButton );
 
         final EditText studentId = (EditText) findViewById(R.id.stid_ip_txt);
         final EditText dob = (EditText) findViewById(R.id.dob_ip_txt);
@@ -61,6 +63,10 @@ public class DoctorActivity extends AppCompatActivity {
         CreateNewPresc.setOnClickListener((view) -> {
                 startActivity(new Intent(DoctorActivity.this,
                         CreatePrescriptionActivity.class));
+        });
+        logout.setOnClickListener((view) -> {
+            startActivity(new Intent(DoctorActivity.this,
+                    MainActivity.class));
         });
     }
 }

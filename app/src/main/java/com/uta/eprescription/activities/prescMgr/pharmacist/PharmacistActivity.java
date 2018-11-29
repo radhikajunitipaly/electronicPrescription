@@ -1,5 +1,6 @@
 package com.uta.eprescription.activities.prescMgr.pharmacist;
 
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.authenticationMgr.MainActivity;
 import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
 import com.uta.eprescription.dao.dbMgr.RecyclerViewAdapter;
 import com.uta.eprescription.dao.dbMgr.UserDao;
@@ -30,6 +33,7 @@ public class PharmacistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pharmacist_page);
+        ImageButton logout = (ImageButton)findViewById( R.id.imageButton );
 
         final EditText studentId = (EditText) findViewById(R.id.stid_ip_txt);
         final EditText dob = (EditText) findViewById(R.id.dob_ip_txt);
@@ -51,6 +55,10 @@ public class PharmacistActivity extends AppCompatActivity {
                         recyclerView.setLayoutManager(new LinearLayoutManager(PharmacistActivity.this));
                     }, studentId.getText().toString(), dob.getText().toString()
             );
+        });
+        logout.setOnClickListener((view) -> {
+            startActivity(new Intent(PharmacistActivity.this,
+                    MainActivity.class));
         });
     }
 }
