@@ -46,7 +46,7 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
                 dp = new DatePickerDialog( CreatePrescriptionActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int myear, int month, int d) {
-                        edate.setText( d + "/" + month + "/" + myear );
+                        edate.setText( month + "/" + d + "/" + myear );
 
                     }
                 },day,mon,yr );

@@ -1,5 +1,6 @@
 package com.uta.eprescription.activities.prescMgr.doctor;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -21,11 +23,14 @@ import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 
 public class DoctorActivity extends AppCompatActivity {
     public RelativeLayout relativeLayout;
 
+    Calendar c;
+    DatePickerDialog dp;
     public RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     ArrayList<Prescription> prescriptionList;
@@ -96,6 +101,25 @@ public class DoctorActivity extends AppCompatActivity {
             studentAgeHeading.setVisibility( View.VISIBLE );
             studentName.setVisibility(View.VISIBLE);
             studentAge.setVisibility(View.VISIBLE);
+        });
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c = Calendar.getInstance();
+                int day = c.get( Calendar.DAY_OF_MONTH );
+                int mon = c.get( Calendar.MONTH );
+                int yr = c.get( Calendar.YEAR );
+                dp = new DatePickerDialog( DoctorActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int myear, int month, int d) {
+                        dob.setText( month + "/" + d + "/" + myear );
+
+                    }
+                },day,mon,yr );
+                dp.show();
+
+            }
+
         });
 
         CreateNewPresc.setOnClickListener((view) -> {
