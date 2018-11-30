@@ -1,31 +1,38 @@
 package com.uta.eprescription.activities.authenticationMgr;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.prescMgr.doctor.CreatePrescriptionActivity;
 import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
 import com.uta.eprescription.models.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class RegisterUserActivity extends AppCompatActivity {
+    Calendar c;
+    DatePickerDialog dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
         Button Btn_register = (Button)findViewById(R.id.registerButton);
-        Button Btn_cancel = (Button)findViewById(R.id.Cancel);
+        Button Btn_cancel = (Button)findViewById( R.id.Cancel );
+        final EditText DOB = (EditText)findViewById( R.id.DOB );
 
         Btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +61,25 @@ public class RegisterUserActivity extends AppCompatActivity {
                         MainActivity.class));
             }
         });
+        DOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c = Calendar.getInstance();
+                int day = c.get( Calendar.DAY_OF_MONTH );
+                int mon = c.get( Calendar.MONTH );
+                int yr = c.get( Calendar.YEAR );
+                dp = new DatePickerDialog( RegisterUserActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int myear, int month, int d) {
+                        DOB.setText( month + "/" + d + "/" + myear );
 
+                    }
+                },day,mon,yr );
+                dp.show();
+
+            }
+
+        });
 
         Btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
