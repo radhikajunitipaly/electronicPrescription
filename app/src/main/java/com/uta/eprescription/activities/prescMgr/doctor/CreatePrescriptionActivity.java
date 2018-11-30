@@ -36,13 +36,31 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = df.format(c);
         date.setText( formattedDate );
+
+        TextView sid = findViewById( R.id.student_id_view );
+        if(getIntent().hasExtra("patientId")) {
+            sid.setText(getIntent().getStringExtra("patientId"));
+        }
+
+        TextView studentName = findViewById( R.id.student_name_view );
+        if(getIntent().hasExtra("patientName")) {
+            studentName.setText(getIntent().getStringExtra("patientName"));
+        }
+
+        TextView studentAge = findViewById( R.id.student_age_view );
+        if(getIntent().hasExtra("patientAge")) {
+            studentAge.setText(getIntent().getStringExtra("patientAge"));
+        }
+
+
         btn_save.setOnClickListener((view) -> {
             final EditText edate = (EditText)findViewById( R.id.edate );
             final EditText med  =   (EditText)findViewById( R.id.Med );
             final EditText pow  = (EditText)findViewById( R.id.Power );
             final EditText countmed = (EditText)findViewById( R.id.count ) ;
+
             date.setText( formattedDate );
-            final EditText sid = (EditText)findViewById( R.id.Studentid );
+
             UserDao dbo = new UserDao();
             dbo.getPrescriptionsOfUserCount( (Long count) -> {
                 count = count+1;

@@ -51,6 +51,23 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
 
         getInComingIntent();
 
+        TextView sid = findViewById( R.id.student_id_view );
+        if(getIntent().hasExtra("userId")) {
+            sid.setText(getIntent().getStringExtra("userId"));
+        }
+
+        TextView studentName = findViewById( R.id.student_name_view );
+        if(getIntent().hasExtra("userName")) {
+            studentName.setText(getIntent().getStringExtra("userName"));
+        }
+
+        TextView studentAge = findViewById( R.id.student_age_view );
+        if(getIntent().hasExtra("userAge")) {
+            studentAge.setText(getIntent().getStringExtra("userAge"));
+        }
+
+
+
         editPrescriptionButton.setOnClickListener((view) -> {
             editPrescriptionButton.setVisibility( View.INVISIBLE );
             saveButton.setVisibility( View.VISIBLE );

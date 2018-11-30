@@ -13,6 +13,10 @@ import com.uta.eprescription.models.Prescription;
 import com.uta.eprescription.models.User;
 import com.uta.eprescription.activities.prescMgr.doctor.PrescriptionCountCall;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class UserDao {
     // for data persistence
@@ -22,8 +26,11 @@ public class UserDao {
     boolean success;
     String userType;
     long countofchild;
+    String userName;
 
     final ArrayList<Prescription> userPrescriptions = new ArrayList<>();
+    final Map<String, String> patientDetails= new HashMap<>();
+
 
     public void addUser(User user) {
         if (!TextUtils.isEmpty( user.getUserId() )) {
@@ -44,10 +51,12 @@ public class UserDao {
                     DataSnapshot user = dataSnapshot.child( loginId );
                     if ((user.child( "password" ).getValue( String.class )).equals( loginPassword )) {
                         userType = user.child( "userType" ).getValue( String.class );
+                        userName = user.child("firstName").getValue( String.class ) + " "
+                                +user.child("lastName").getValue( String.class );
                         success = true;
                     }
                 }
-                finishedCallback.callback( success, userType );
+                finishedCallback.callback( success, userType, userName );
             }
 
             @Override
@@ -66,6 +75,9 @@ public class UserDao {
                 if (dataSnapshot.hasChild( userId )) {
                     DataSnapshot userSnapshot = dataSnapshot.child( userId );
                     if ((userSnapshot.child( "DOB" ).getValue( String.class )).equals( dob )) {
+                        patientDetails.put("patientName", userSnapshot.child("firstName").getValue( String.class ) + " "
+                                +userSnapshot.child("lastName").getValue( String.class ));
+                        patientDetails.put("patientDob", userSnapshot.child( "DOB" ).getValue( String.class ));
                         DataSnapshot contentSnapshot = userSnapshot.child( "prescriptions" );
                         Iterable<DataSnapshot> prescriptionSnapshot = contentSnapshot.getChildren();
                         for (DataSnapshot prescription : prescriptionSnapshot) {
@@ -74,7 +86,7 @@ public class UserDao {
                         }
                     }
                 }
-                finishedCallback.callback( userPrescriptions );
+                finishedCallback.callback( userPrescriptions , patientDetails);
             }
 
             @Override

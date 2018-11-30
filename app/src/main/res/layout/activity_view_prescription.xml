@@ -9,24 +9,107 @@
 
     <TextView
         android:id="@+id/textView_vwpres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:text="View Prescription"
-        android:textSize="20sp"
+        android:layout_width="350dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="100dp"
+        android:text="Create Prescription"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/student_name_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="15dp"
+        android:text="Name: "
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/create_prescription"
+        app:layout_constraintEnd_toStartOf="@+id/student_name_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22000003" />
+
+    <TextView
+        android:id="@+id/student_name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Student"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@id/create_prescription"
+        app:layout_constraintStart_toEndOf="@+id/student_name_heading"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22000003" />
+
+    <TextView
+        android:id="@+id/student_age_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:text="Age: "
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/create_prescription"
+        app:layout_constraintStart_toEndOf="@+id/student_name_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22000003" />
+
+    <TextView
+        android:id="@+id/student_age_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        android:text="Age"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/student_age_heading"
+        app:layout_constraintBottom_toBottomOf="@id/create_prescription"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22000003"/>
+
+    <TextView
+        android:id="@+id/student_id_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:text="Student Id: "
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/create_prescription"
+        app:layout_constraintStart_toEndOf="@+id/student_age_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22000003" />
+
+    <TextView
+        android:id="@+id/student_id_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text=""
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/student_id_heading"
+        app:layout_constraintBottom_toBottomOf="@id/create_prescription"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22000003" />
 
     <TextView
         android:id="@+id/st_date_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="Start Date"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -98,7 +181,6 @@
         android:layout_height="wrap_content"
         android:text="10/30/2018"
         android:textSize="18sp"
-        android:textStyle="bold"
         android:weightSum="30"
         app:layout_constraintBaseline_toBaselineOf="@+id/st_date_view"
         app:layout_constraintStart_toStartOf="@+id/textView_data_exp_date" />
@@ -109,7 +191,6 @@
         android:layout_height="wrap_content"
         android:text="11/10/2018"
         android:textSize="18sp"
-        android:textStyle="bold"
         android:weightSum="30"
         app:layout_constraintBaseline_toBaselineOf="@+id/exp_date_view"
         app:layout_constraintStart_toStartOf="@+id/textView_dat_med" />
@@ -121,7 +202,6 @@
         android:text="Ibux"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_med"
         app:layout_constraintStart_toStartOf="@+id/textView_dat_pwr" />
 
@@ -133,7 +213,6 @@
         android:layout_marginEnd="8dp"
         android:text="250mg"
         android:textSize="18sp"
-        android:textStyle="bold"
         android:weightSum="30"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_pwr"
         app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +228,6 @@
         android:clickable="false"
         android:text="10"
         android:textSize="18sp"
-        android:textStyle="bold"
         android:weightSum="30"
         app:layout_constraintBottom_toBottomOf="@+id/spinner_vw_status"
         app:layout_constraintStart_toStartOf="@+id/textView_dat_pwr"
@@ -157,7 +235,7 @@
 
     <Spinner
         android:id="@+id/spinner_vw_status"
-        android:layout_width="250dp"
+        android:layout_width="210dp"
         android:layout_height="23dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="16dp"
@@ -165,6 +243,7 @@
         android:entries="@array/status_array"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView_sts"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView_sts" />
 
     <Button
@@ -179,7 +258,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_save"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_vw_status" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_vw_status"
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -215,5 +295,5 @@
         app:layout_constraintEnd_toStartOf="@+id/button_edit_ps"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/spinner_vw_status"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>

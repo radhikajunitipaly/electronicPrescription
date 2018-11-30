@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.prescMgr.common.ViewPrescriptionActivity;
 import com.uta.eprescription.activities.prescMgr.patient.PatientActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
@@ -27,20 +29,27 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton.setOnClickListener((view) -> {
                 UserDao userDao = new UserDao();
-                userDao.verifyUserIdAndPassword((boolean success, String userType) -> {
+                userDao.verifyUserIdAndPassword((boolean success, String userType, String userName) -> {
                         if (success) {
+                            Intent intent;
                             switch (userType) {
                                 case "Doctor":
-                                    startActivity(new Intent(MainActivity.this,
-                                            DoctorActivity.class));
+                                    intent = new Intent(MainActivity.this,
+                                            DoctorActivity.class);
+                                    intent.putExtra("userNameForWelcome", userName);
+                                    startActivity(intent);
                                     break;
                                 case "Pharmacist":
-                                    startActivity(new Intent(MainActivity.this,
-                                            PharmacistActivity.class));
+                                    intent = new Intent(MainActivity.this,
+                                            PharmacistActivity.class);
+                                    intent.putExtra("userNameForWelcome", userName);
+                                    startActivity(intent);
                                     break;
                                 case "Student":
-                                    startActivity(new Intent(MainActivity.this,
-                                            PatientActivity.class));
+                                    intent = new Intent(MainActivity.this,
+                                            PatientActivity.class);
+                                    intent.putExtra("userNameForWelcome", userName);
+                                    startActivity(intent);
                                     break;
                                 default:
                                     AlertDialog alert = new AlertDialog.Builder(

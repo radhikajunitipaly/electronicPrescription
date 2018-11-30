@@ -22,6 +22,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private ArrayList<Prescription> mData;
     private String mUserId;
+    private String mUserName;
+    private String mUserAge;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private AdapterView.OnItemLongClickListener mLongClickListener;
@@ -30,17 +32,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     // data is passed into the constructor
-    public RecyclerViewAdapter(Context context, ArrayList<Prescription> data, String userId) {
+    public RecyclerViewAdapter(Context context, ArrayList<Prescription> data, String userId,
+                               String userName, String userAge) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.mContext = context;
         this.mUserId= userId;
+        this.mUserName= userName;
+        this.mUserAge= userAge;
     }
 
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.layout_prescitem, parent, false);
+        View view = mInflater.inflate(R.layout.recycler_view_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -48,12 +53,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Prescription entry = mData.get(position);
-        holder.myTextView.setText(entry.getPid());
+        holder.prescriptionIdText.setText(entry.getPid());
+        holder.prescriptionDatesText.setText("Valid from " + entry.getStartDate() + "\nValid to " + entry.getEndDate());
 
-        holder.parentLayout.setOnClickListener((view) -> {
+        holder.prescriptionIdText.setOnClickListener((view) -> {
             Intent intent = new Intent(mContext, ViewPrescriptionActivity.class);
             intent.putExtra("pid", entry.getPid());
             intent.putExtra("userId", mUserId);
+            intent.putExtra("userName", mUserName);
+            intent.putExtra("userAge", mUserAge);
             intent.putExtra("userType", mContext.getClass().getSimpleName());
             intent.putExtra("medicine", mData.get(position).getMedicine());
             intent.putExtra("startDate", mData.get(position).getStartDate());
@@ -74,12 +82,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView myTextView;
+        TextView prescriptionIdText;
+        TextView prescriptionDatesText;
         RelativeLayout parentLayout;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.entry);
+            prescriptionIdText = itemView.findViewById(R.id.prescriptionIdText);
+            prescriptionDatesText = itemView.findViewById(R.id.prescriptionDatesText);
             parentLayout = itemView.findViewById(R.id.parent_layout);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

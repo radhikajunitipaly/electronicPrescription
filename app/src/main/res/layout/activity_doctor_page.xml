@@ -17,12 +17,12 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
+            android:layout_width="378dp"
+            android:layout_height="35dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,9 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Welcome"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:text="Welcome Dr"
+            android:textSize="18dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,9 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="sans-serif"
-            android:text="Doctor1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:text="name"
+            android:textStyle="bold"
+            android:textSize="18dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/welcome_stud"
             app:layout_constraintStart_toEndOf="@+id/welcome_stud" />
 
@@ -56,7 +56,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="Student ID:"
-            android:textAllCaps="true"
+            android:textAllCaps="false"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -71,18 +71,20 @@
             android:inputType="textPersonName"
             android:textColor="@android:color/background_dark"
             android:textColorHighlight="@color/colorPrimaryDark"
+            android:textSize="15dp"
             android:textCursorDrawable="@null"
             app:layout_constraintBaseline_toBaselineOf="@+id/student_id_ip_view"
             app:layout_constraintStart_toEndOf="@+id/student_id_ip_view" />
 
         <EditText
             android:id="@+id/dob_ip_txt"
-            android:layout_width="90dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:ems="10"
             android:inputType="textPersonName"
+            android:textSize="15dp"
             android:textColor="@android:color/background_dark"
             android:textColorHighlight="@color/colorPrimaryDark"
             android:textCursorDrawable="@null"
@@ -107,8 +109,9 @@
             android:layout_width="80dp"
             android:layout_height="37dp"
             android:layout_marginStart="80dp"
+            android:background="@drawable/rounded_button"
             android:text="Search"
-            android:background="#4285F4"
+            android:textAllCaps="false"
             app:layout_constraintStart_toEndOf="@+id/button_cnl"
             app:layout_constraintTop_toBottomOf="@+id/dob_ip_txt" />
 
@@ -117,8 +120,9 @@
             android:layout_width="80dp"
             android:layout_height="37dp"
             android:layout_marginStart="48dp"
+            android:background="@drawable/rounded_button"
             android:text="Reset"
-            android:background="#4285F4"
+            android:textAllCaps="false"
             app:layout_constraintStart_toStartOf="@+id/student_id_ip_view"
             app:layout_constraintTop_toBottomOf="@+id/stid_ip_txt" />
 
@@ -130,8 +134,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_button"
             android:text="Create Prescription"
-            android:background="#4285F4"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/button_srch"
             app:layout_constraintHorizontal_bias="0.507"
@@ -141,35 +146,91 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:background="@drawable/logout"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignTop="@+id/linearLayout"
             android:layout_marginStart="3dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:background="@drawable/logout"
             app:layout_constraintBottom_toTopOf="@+id/dob_ip_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.747"
             app:layout_constraintStart_toEndOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.342"
-             />
+            app:layout_constraintVertical_bias="0.342" />
 
+        <TextView
+            android:id="@+id/student_name_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:text="Name: "
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/student_id_ip_view"
+            app:layout_constraintTop_toBottomOf="@+id/button_create" />
+
+        <TextView
+            android:id="@+id/student_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:text="Student"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toEndOf="@+id/student_name_heading"
+            app:layout_constraintTop_toBottomOf="@+id/button_create" />
+
+        <TextView
+            android:id="@+id/student_age_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:text="Age: "
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/student_name_view"
+            app:layout_constraintTop_toBottomOf="@+id/button_create" />
+
+        <TextView
+            android:id="@+id/student_age_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:text="Age"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toEndOf="@+id/student_age_heading"
+            app:layout_constraintTop_toBottomOf="@+id/button_create" />
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="328dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.512" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="8dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="306dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="190dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.512"
+            tools:listitem="@layout/recycler_view_item" />
+    </RelativeLayout>
 
 </RelativeLayout>
