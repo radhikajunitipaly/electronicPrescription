@@ -10,6 +10,20 @@
     android:minHeight="0dp"
     tools:context=".activities.authenticationMgr.MainActivity">
 
+    <ImageView
+        android:id="@+id/userIdImage"
+        android:layout_width="35dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796"
+        app:srcCompat="@drawable/user_image" />
+
     <EditText
         android:id="@+id/User_id"
         android:layout_width="200dp"
@@ -21,14 +35,27 @@
         android:textColor="@android:color/background_dark"
         android:textColorHighlight="@color/colorPrimaryDark"
         android:textCursorDrawable="@null"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.635"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.478" />
+
+    <ImageView
+        android:id="@+id/passwordImage"
+        android:layout_width="35dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/password_image" />
 
     <EditText
         android:id="@+id/login_password"
@@ -41,28 +68,26 @@
         android:inputType="textPassword"
         android:textColorHighlight="@color/colorPrimaryDark"
         android:textCursorDrawable="@null"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.653"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/User_id" />
 
     <Button
-        android:id="@+id/button_sign_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
+        android:id="@+id/main_reg_button"
+        android:layout_width="115dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="188dp"
         android:layout_marginBottom="125dp"
-        android:text="Sign In"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:background="@drawable/rounded_button"
+        android:text="REGISTER"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password"
-        />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/login_password"
+        app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier"
@@ -71,20 +96,20 @@
         app:barrierDirection="left" />
 
     <Button
-        android:id="@+id/main_reg_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/button_sign_in"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:layout_marginStart="33dp"
         android:layout_marginTop="57dp"
-        android:layout_marginEnd="78dp"
         android:layout_marginBottom="182dp"
-        android:text="Register"
+        android:background="@drawable/rounded_button"
+        android:text="SIGN IN"
         android:textColor="@android:color/background_dark"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_sign_in"
+        app:layout_constraintEnd_toEndOf="@+id/login_password"
+        app:layout_constraintHorizontal_bias="0.279"
+        app:layout_constraintStart_toEndOf="@+id/registerButton"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
     <ImageView
@@ -98,6 +123,6 @@
         app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/uta_logo" />
+        app:srcCompat="@drawable/uta_logo_image" />
 
 </android.support.constraint.ConstraintLayout>

@@ -104,35 +104,40 @@
 
         <Button
             android:id="@+id/button_srch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="80dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="80dp"
             android:text="Search"
+            android:background="#4285F4"
             app:layout_constraintStart_toEndOf="@+id/button_cnl"
             app:layout_constraintTop_toBottomOf="@+id/dob_ip_txt" />
 
         <Button
             android:id="@+id/button_cnl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Cancel"
+            android:layout_width="80dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="48dp"
+            android:text="Reset"
+            android:background="#4285F4"
             app:layout_constraintStart_toStartOf="@+id/student_id_ip_view"
             app:layout_constraintTop_toBottomOf="@+id/stid_ip_txt" />
 
         <Button
             android:id="@+id/button_create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="177dp"
+            android:layout_height="37dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Create"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_srch"
-            app:layout_constraintTop_toBottomOf="@+id/dob_ip_txt" />
+            android:layout_marginBottom="8dp"
+            android:text="Create Prescription"
+            android:background="#4285F4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/button_srch"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="@+id/button_cnl"
+            app:layout_constraintTop_toBottomOf="@+id/button_srch"
+            app:layout_constraintVertical_bias="0.003" />
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -159,7 +164,7 @@
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
