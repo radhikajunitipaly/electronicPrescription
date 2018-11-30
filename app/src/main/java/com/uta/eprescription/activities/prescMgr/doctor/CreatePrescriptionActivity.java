@@ -1,11 +1,13 @@
 package com.uta.eprescription.activities.prescMgr.doctor;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,12 +26,35 @@ import java.util.Date;
 public class CreatePrescriptionActivity extends AppCompatActivity {
     String p = "Prescription ";
     String pidNew;
+    Calendar c;
+    DatePickerDialog dp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_create_prescription );
         Button btn_save = findViewById( R.id.button_save ) ;
         final EditText date = (EditText)findViewById( R.id.sdate );
+        final EditText edate = (EditText)findViewById( R.id.edate );
+        edate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c = Calendar.getInstance();
+                int day = c.get( Calendar.DAY_OF_MONTH );
+                int mon = c.get( Calendar.MONTH );
+                int yr = c.get( Calendar.YEAR );
+                dp = new DatePickerDialog( CreatePrescriptionActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int myear, int month, int d) {
+                        edate.setText( d + "/" + month + "/" + myear );
+
+                    }
+                },day,mon,yr );
+                dp.show();
+
+            }
+
+        });
 
         Date c = Calendar.getInstance().getTime();
         System.out.println("Current time => " + c);
@@ -37,7 +62,6 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
         String formattedDate = df.format(c);
         date.setText( formattedDate );
         btn_save.setOnClickListener((view) -> {
-            final EditText edate = (EditText)findViewById( R.id.edate );
             final EditText med  =   (EditText)findViewById( R.id.Med );
             final EditText pow  = (EditText)findViewById( R.id.Power );
             final EditText countmed = (EditText)findViewById( R.id.count ) ;
