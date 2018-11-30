@@ -103,10 +103,11 @@ public class PharmacistActivity extends AppCompatActivity {
                 dp = new DatePickerDialog( PharmacistActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int myear, int month, int d) {
+                        month=month+1;
                         dob.setText( month + "/" + d + "/" + myear );
 
                     }
-                },day,mon,yr );
+                },yr,mon,day );
                 dp.show();
 
             }
