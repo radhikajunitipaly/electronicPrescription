@@ -36,9 +36,7 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
         Button btn_save = findViewById( R.id.button_save ) ;
         final EditText date = (EditText)findViewById( R.id.sdate );
         final EditText edate = (EditText)findViewById( R.id.edate );
-        edate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        edate.setOnClickListener((view) -> {
                 c = Calendar.getInstance();
                 int day = c.get( Calendar.DAY_OF_MONTH );
                 int mon = c.get( Calendar.MONTH );
@@ -52,9 +50,6 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
                     }
                 },yr,mon,day );
                 dp.show();
-
-            }
-
         });
 
         Date c = Calendar.getInstance().getTime();

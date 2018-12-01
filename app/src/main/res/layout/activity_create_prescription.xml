@@ -103,16 +103,21 @@
 
     <Button
         android:id="@+id/button_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="37dp"
         android:layout_marginStart="135dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="161dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button"
         android:text="Save"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.933" />
 
     <TextView
         android:id="@+id/textView3"
