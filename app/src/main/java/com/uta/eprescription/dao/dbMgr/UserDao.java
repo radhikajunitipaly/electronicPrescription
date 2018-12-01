@@ -74,7 +74,7 @@ public class UserDao {
                 dataSnapshot.getChildren();
                 if (dataSnapshot.hasChild( userId )) {
                     DataSnapshot userSnapshot = dataSnapshot.child( userId );
-                    if ((userSnapshot.child( "DOB" ).getValue( String.class )).equals( dob )) {
+                    if ((userSnapshot.child( "dob" ).getValue( String.class )).equals( dob )) {
                         patientDetails.put("patientName", userSnapshot.child("firstName").getValue( String.class ) + " "
                                 +userSnapshot.child("lastName").getValue( String.class ));
                         patientDetails.put("patientDob", userSnapshot.child( "DOB" ).getValue( String.class ));
@@ -83,10 +83,15 @@ public class UserDao {
                         for (DataSnapshot prescription : prescriptionSnapshot) {
                             Prescription tempPrescription = prescription.getValue( Prescription.class );
                             userPrescriptions.add( tempPrescription );
+                            success=true;
                         }
                     }
                 }
-                finishedCallback.callback( userPrescriptions , patientDetails);
+                else
+                {
+                    success = false;
+                }
+                finishedCallback.callback(userPrescriptions , patientDetails,success);
             }
 
             @Override

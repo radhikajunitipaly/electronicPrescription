@@ -29,7 +29,21 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton.setOnClickListener((view) -> {
                 UserDao userDao = new UserDao();
-                userDao.verifyUserIdAndPassword((boolean success, String userType, String userName) -> {
+                if(userIdField.getText().toString().equals( "" )||passwordField.getText().toString().equals( "" ))
+                {
+                    AlertDialog alert = new AlertDialog.Builder(
+                            MainActivity.this).create();
+                    alert.setTitle("Alert");
+                    alert.setMessage("Please Enter UserID/Password");
+                    alert.setButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    alert.show();
+
+                }
+                else{
+                    userDao.verifyUserIdAndPassword((boolean success, String userType, String userName) -> {
                         if (success) {
                             Intent intent;
                             switch (userType) {
@@ -74,8 +88,11 @@ public class MainActivity extends AppCompatActivity {
                             });
                             alert.show();
                         }
-                }, userIdField.getText().toString(), passwordField.getText().toString());
+                    }, userIdField.getText().toString(), passwordField.getText().toString());
+                }
+
         });
+
         main_reg_button.setOnClickListener((view) -> {
                 startActivity(new Intent(MainActivity.this,
                         RegisterUserActivity.class));
