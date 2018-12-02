@@ -95,7 +95,7 @@ public class PatientActivity extends AppCompatActivity {
                                 recyclerView = findViewById( R.id.recycler_view );
                                 recyclerViewAdapter = new RecyclerViewAdapter(
                                         PatientActivity.this, prescriptionList,
-                                        studentId.getText().toString(), patientDisplayName, patientDisplayAge );
+                                        studentId.getText().toString(), patientDisplayName, patientDisplayAge, patientDob );
                                 recyclerView.setAdapter( recyclerViewAdapter );
                                 recyclerView.addItemDecoration( new DividerItemDecoration(
                                         PatientActivity.this, DividerItemDecoration.VERTICAL ) );

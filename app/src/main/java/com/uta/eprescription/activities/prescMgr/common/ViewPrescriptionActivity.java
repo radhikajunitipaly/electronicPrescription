@@ -1,5 +1,6 @@
 package com.uta.eprescription.activities.prescMgr.common;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.uta.eprescription.R;
 import com.uta.eprescription.activities.prescMgr.doctor.CreatePrescriptionActivity;
+import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
 import com.uta.eprescription.models.User;
@@ -101,6 +103,11 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
             displayPrescription();
             Toast.makeText(ViewPrescriptionActivity.this,"Prescription Saved",
                     Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ViewPrescriptionActivity.this,
+                    DoctorActivity.class);
+            intent.putExtra("patientIdFromCreate", getIntent().getStringExtra("userId"));
+            intent.putExtra("dobFromCreate", getIntent().getStringExtra("userDob"));
+            startActivity(intent);
         });
     }
 

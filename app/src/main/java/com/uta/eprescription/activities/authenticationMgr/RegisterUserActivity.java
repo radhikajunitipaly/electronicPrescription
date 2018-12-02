@@ -52,7 +52,6 @@ public class RegisterUserActivity extends AppCompatActivity {
                        phone.getText().toString(),FirstName.getText().toString(),
                        LastName.getText().toString(),selectedRadio.getText().toString(),
                        DOB.getText().toString(), prescriptionArrayList);
-                //User user = new User("shakthi","password","wwrrr","sss","ssss","doc","fff");
                UserDao userDao = new UserDao();
                userDao.addUser(user);
                 Toast.makeText(RegisterUserActivity.this,"User Registered",
@@ -61,9 +60,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                         MainActivity.class));
             }
         });
-        DOB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        DOB.setOnClickListener((view) -> {
                 c = Calendar.getInstance();
                 int day = c.get( Calendar.DAY_OF_MONTH );
                 int mon = c.get( Calendar.MONTH );
@@ -77,19 +74,14 @@ public class RegisterUserActivity extends AppCompatActivity {
                     }
                 },yr,mon,day );
                 dp.show();
-
-            }
-
         });
 
-        Btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        Btn_cancel.setOnClickListener((view) -> {
                 final EditText UserID = (EditText)findViewById( R.id.UserIDText );
                 final  EditText pass = (EditText)findViewById( R.id.UserPassword );
                 final EditText LastName = (EditText)findViewById( R.id.Lname );
                 final EditText FirstName = (EditText)findViewById( R.id.Fname );
-                final EditText DOB = (EditText)findViewById( R.id.DOB );
+                final EditText dob = (EditText)findViewById( R.id.DOB );
                 final EditText phone = (EditText)findViewById( R.id.Phone ) ;
                 final RadioGroup rdgrp = (RadioGroup)findViewById( R.id.RadioGrp );
                 int selectedId = rdgrp.getCheckedRadioButtonId();
@@ -98,10 +90,9 @@ public class RegisterUserActivity extends AppCompatActivity {
                 pass.setText("");
                 LastName.setText("");
                 FirstName.setText("");
-                DOB.setText("");
+                dob.setText("");
                 phone.setText("");
                 rdgrp.clearCheck();
-                }
         });
 
 
