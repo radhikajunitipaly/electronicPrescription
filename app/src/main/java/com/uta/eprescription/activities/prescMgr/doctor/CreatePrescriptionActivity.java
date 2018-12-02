@@ -45,7 +45,10 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int myear, int month, int d) {
                         month = month+1;
-                        edate.setText( month + "/" + d + "/" + myear );
+                        String months,days;
+                        if(d<10) { days = "0"+d;}else{days = ""+d;}
+                        if(month<10) { months = "0"+month;}else{months = ""+month;}
+                        edate.setText( months +"/" + days + "/" + myear );
 
                     }
                 },yr,mon,day );
@@ -90,8 +93,9 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
             },sid.getText().toString());
             Toast.makeText(CreatePrescriptionActivity.this,"Prescription created",
                     Toast.LENGTH_LONG).show();
-            startActivity(new Intent(CreatePrescriptionActivity.this,
-                    DoctorActivity.class));
+            finish();
+           // startActivity(new Intent(CreatePrescriptionActivity.this,
+                   // DoctorActivity.class));
         });
     }
 }
