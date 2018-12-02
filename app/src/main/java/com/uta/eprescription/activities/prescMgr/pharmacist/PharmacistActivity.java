@@ -1,6 +1,8 @@
 package com.uta.eprescription.activities.prescMgr.pharmacist;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -73,32 +75,65 @@ public class PharmacistActivity extends AppCompatActivity {
             studentId.setText("");
             dob.setText("");
         });
+        boolean success;
 
         prescriptionButton.setOnClickListener((view) -> {
-            UserDao userDao = new UserDao();
-            userDao.getPrescriptionsOfUser(
-                    (ArrayList prescriptionListTemp, Map patientDetails) -> {
-                        patientDisplayName = patientDetails.get("patientName").toString();
-                        String patientDob = patientDetails.get("patientDob").toString();
-                        patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
-                                patientDob.substring(patientDob.length() - 4)));
-                        prescriptionList = prescriptionListTemp;
-                        recyclerView = findViewById(R.id.recycler_view);
-                        recyclerViewAdapter = new RecyclerViewAdapter(
-                                PharmacistActivity.this, prescriptionList,
-                                studentId.getText().toString(), patientDisplayName, patientDisplayAge);
-                        recyclerView.setAdapter(recyclerViewAdapter);
-                        recyclerView.addItemDecoration(new DividerItemDecoration(
-                                PharmacistActivity.this, DividerItemDecoration.VERTICAL));
-                        recyclerView.setLayoutManager(new LinearLayoutManager(PharmacistActivity.this));
-                        studentName.setText(patientDisplayName);
-                        studentAge.setText(patientDisplayAge);
-                    }, studentId.getText().toString(), dob.getText().toString()
-            );
-            studentNameHeading.setVisibility( View.VISIBLE );
-            studentAgeHeading.setVisibility( View.VISIBLE );
-            studentName.setVisibility(View.VISIBLE);
-            studentAge.setVisibility(View.VISIBLE);
+            if(studentId.getText().toString().equals( "" )||dob.getText().toString().equals( "" ))
+            {
+                AlertDialog alert = new AlertDialog.Builder(
+                        PharmacistActivity.this).create();
+                alert.setTitle("Alert");
+                alert.setMessage("Please enter Student ID or Date of Birth");
+                alert.setButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                alert.show();
+            }
+            else
+            {
+                UserDao userDao = new UserDao();
+                userDao.getPrescriptionsOfUser(
+                        (ArrayList prescriptionListTemp, Map patientDetails,boolean sucess) -> {
+                            if(sucess){
+                                patientDisplayName = patientDetails.get("patientName").toString();
+                                String patientDob = patientDetails.get("patientDob").toString();
+                                patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
+                                        patientDob.substring(patientDob.length() - 4)));
+                                prescriptionList = prescriptionListTemp;
+                                recyclerView = findViewById(R.id.recycler_view);
+                                recyclerViewAdapter = new RecyclerViewAdapter(
+                                        PharmacistActivity.this, prescriptionList,
+                                        studentId.getText().toString(), patientDisplayName, patientDisplayAge);
+                                recyclerView.setAdapter(recyclerViewAdapter);
+                                recyclerView.addItemDecoration(new DividerItemDecoration(
+                                        PharmacistActivity.this, DividerItemDecoration.VERTICAL));
+                                recyclerView.setLayoutManager(new LinearLayoutManager(PharmacistActivity.this));
+                                studentName.setText(patientDisplayName);
+                                studentAge.setText(patientDisplayAge);
+                            }
+                            else
+                            {
+                                AlertDialog alert = new AlertDialog.Builder(
+                                        PharmacistActivity.this).create();
+                                alert.setTitle("Alert");
+                                alert.setMessage("Please enter Valid student ID or Date of Birth");
+                                alert.setButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                                alert.show();
+                            }
+
+                        },studentId.getText().toString(), dob.getText().toString()
+                );
+                studentNameHeading.setVisibility( View.VISIBLE );
+                studentAgeHeading.setVisibility( View.VISIBLE );
+                studentName.setVisibility(View.VISIBLE);
+                studentAge.setVisibility(View.VISIBLE);
+
+            }
+
         });
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,10 +145,11 @@ public class PharmacistActivity extends AppCompatActivity {
                 dp = new DatePickerDialog( PharmacistActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int myear, int month, int d) {
+                        month=month+1;
                         dob.setText( month + "/" + d + "/" + myear );
 
                     }
-                },day,mon,yr );
+                },yr,mon,day );
                 dp.show();
 
             }

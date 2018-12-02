@@ -1,6 +1,8 @@
 package com.uta.eprescription.activities.prescMgr.doctor;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import com.uta.eprescription.R;
 import com.uta.eprescription.activities.authenticationMgr.MainActivity;
 import com.uta.eprescription.activities.authenticationMgr.RegisterUserActivity;
+import com.uta.eprescription.activities.prescMgr.pharmacist.PharmacistActivity;
 import com.uta.eprescription.dao.dbMgr.RecyclerViewAdapter;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
@@ -96,11 +99,12 @@ public class DoctorActivity extends AppCompatActivity {
                                 studentAge.setText(patientDisplayAge);
                         }, studentId.getText().toString(), dob.getText().toString()
 
-                );
-            studentNameHeading.setVisibility( View.VISIBLE );
-            studentAgeHeading.setVisibility( View.VISIBLE );
-            studentName.setVisibility(View.VISIBLE);
-            studentAge.setVisibility(View.VISIBLE);
+                    );
+                    studentNameHeading.setVisibility( View.VISIBLE );
+                    studentAgeHeading.setVisibility( View.VISIBLE );
+                    studentName.setVisibility( View.VISIBLE );
+                    studentAge.setVisibility( View.VISIBLE );
+                }
         });
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,10 +116,11 @@ public class DoctorActivity extends AppCompatActivity {
                 dp = new DatePickerDialog( DoctorActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int myear, int month, int d) {
+                        month=month+1;
                         dob.setText( month + "/" + d + "/" + myear );
 
                     }
-                },day,mon,yr );
+                },yr,mon,day);
                 dp.show();
 
             }

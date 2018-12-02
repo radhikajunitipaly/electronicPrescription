@@ -71,10 +71,11 @@ public class RegisterUserActivity extends AppCompatActivity {
                 dp = new DatePickerDialog( RegisterUserActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int myear, int month, int d) {
+                        month=month+1;
                         DOB.setText( month + "/" + d + "/" + myear );
 
                     }
-                },day,mon,yr );
+                },yr,mon,day );
                 dp.show();
 
             }

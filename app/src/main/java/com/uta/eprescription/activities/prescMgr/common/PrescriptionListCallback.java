@@ -4,5 +4,5 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public interface PrescriptionListCallback <T> {
-    void callback(ArrayList prescriptionList, Map patientDetails);
+    void callback(ArrayList prescriptionList, Map patientDetails,boolean success);
 }

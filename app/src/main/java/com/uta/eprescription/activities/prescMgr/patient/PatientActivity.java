@@ -1,5 +1,7 @@
 package com.uta.eprescription.activities.prescMgr.patient;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -67,31 +69,57 @@ public class PatientActivity extends AppCompatActivity {
         });
 
         prescriptionButton.setOnClickListener( (view) -> {
-            UserDao userDao = new UserDao();
-            userDao.getPrescriptionsOfUser(
-                    (ArrayList prescriptionListTemp, Map patientDetails) -> {
-                        patientDisplayName = patientDetails.get("patientName").toString();
-                        String patientDob = patientDetails.get("patientDob").toString();
-                        patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
-                                patientDob.substring(patientDob.length() - 4)));
-                        prescriptionList = prescriptionListTemp;
-                        recyclerView = findViewById( R.id.recycler_view );
-                        recyclerViewAdapter = new RecyclerViewAdapter(
-                                PatientActivity.this, prescriptionList,
-                                studentId.getText().toString(), patientDisplayName, patientDisplayAge);
-                        recyclerView.setAdapter( recyclerViewAdapter );
-                        recyclerView.addItemDecoration( new DividerItemDecoration(
-                                PatientActivity.this, DividerItemDecoration.VERTICAL ) );
-                        recyclerView.setLayoutManager( new LinearLayoutManager( PatientActivity.this ) );
-                        studentName.setText(patientDisplayName);
-                        studentAge.setText(patientDisplayAge);
-                    }, studentId.getText().toString(), dob.getText().toString()
+            if(studentId.getText().toString().equals( "" )||dob.getText().toString().equals( "" ))
+            {
+                AlertDialog alert = new AlertDialog.Builder(
+                        PatientActivity.this ).create();
+                alert.setTitle( "Alert" );
+                alert.setMessage( "Please enter Student ID or Date of Birth" );
+                alert.setButton( "OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                } );
+                alert.show();
 
-            );
-            studentNameHeading.setVisibility( View.VISIBLE );
-            studentAgeHeading.setVisibility( View.VISIBLE );
-            studentName.setVisibility(View.VISIBLE);
-            studentAge.setVisibility(View.VISIBLE);
+            }
+            else {
+                UserDao userDao = new UserDao();
+                userDao.getPrescriptionsOfUser(
+                        (ArrayList prescriptionListTemp, Map patientDetails, boolean sucess) -> {
+                            if (sucess) {
+                                patientDisplayName = patientDetails.get( "patientName" ).toString();
+                                String patientDob = patientDetails.get("patientDob").toString();
+                                patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
+                                        patientDob.substring(patientDob.length() - 4)));                               prescriptionList = prescriptionListTemp;
+                                recyclerView = findViewById( R.id.recycler_view );
+                                recyclerViewAdapter = new RecyclerViewAdapter(
+                                        PatientActivity.this, prescriptionList,
+                                        studentId.getText().toString(), patientDisplayName, patientDisplayAge );
+                                recyclerView.setAdapter( recyclerViewAdapter );
+                                recyclerView.addItemDecoration( new DividerItemDecoration(
+                                        PatientActivity.this, DividerItemDecoration.VERTICAL ) );
+                                recyclerView.setLayoutManager( new LinearLayoutManager( PatientActivity.this ) );
+                                studentName.setText( patientDisplayName );
+                                studentAge.setText( patientDisplayAge );
+                            } else {
+                                AlertDialog alert = new AlertDialog.Builder(
+                                        PatientActivity.this ).create();
+                                alert.setTitle( "Alert" );
+                                alert.setMessage( "Please enter valid Student ID or Date of Birth" );
+                                alert.setButton( "OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                } );
+                                alert.show();
+                            }
+                        }, studentId.getText().toString(), dob.getText().toString()
+
+                );
+                studentNameHeading.setVisibility( View.VISIBLE );
+                studentAgeHeading.setVisibility( View.VISIBLE );
+                studentName.setVisibility( View.VISIBLE );
+                studentAge.setVisibility( View.VISIBLE );
+            }
         } );
         logout.setOnClickListener( (view) -> {
             startActivity( new Intent( PatientActivity.this,

@@ -44,16 +44,17 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
                 dp = new DatePickerDialog( CreatePrescriptionActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int myear, int month, int d) {
+                        month = month+1;
                         edate.setText( month + "/" + d + "/" + myear );
 
                     }
-                },day,mon,yr );
+                },yr,mon,day );
                 dp.show();
         });
 
         Date c = Calendar.getInstance().getTime();
         System.out.println("Current time => " + c);
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         String formattedDate = df.format(c);
         date.setText( formattedDate );
 

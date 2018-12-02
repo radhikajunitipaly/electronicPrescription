@@ -83,10 +83,15 @@ public class UserDao {
                         for (DataSnapshot prescription : prescriptionSnapshot) {
                             Prescription tempPrescription = prescription.getValue( Prescription.class );
                             userPrescriptions.add( tempPrescription );
+                            success=true;
                         }
                     //}
                 }
-                finishedCallback.callback( userPrescriptions , patientDetails);
+                else
+                {
+                    success = false;
+                }
+                finishedCallback.callback(userPrescriptions , patientDetails,success);
             }
 
             @Override
