@@ -74,17 +74,17 @@ public class UserDao {
                 dataSnapshot.getChildren();
                 if (dataSnapshot.hasChild( userId )) {
                     DataSnapshot userSnapshot = dataSnapshot.child( userId );
-                    if ((userSnapshot.child( "DOB" ).getValue( String.class )).equals( dob )) {
+                    //if ((userSnapshot.child( "dob" ).getValue( String.class )).equals( dob )) {
                         patientDetails.put("patientName", userSnapshot.child("firstName").getValue( String.class ) + " "
                                 +userSnapshot.child("lastName").getValue( String.class ));
-                        patientDetails.put("patientDob", userSnapshot.child( "DOB" ).getValue( String.class ));
+                        patientDetails.put("patientDob", userSnapshot.child( "dob" ).getValue( String.class ));
                         DataSnapshot contentSnapshot = userSnapshot.child( "prescriptions" );
                         Iterable<DataSnapshot> prescriptionSnapshot = contentSnapshot.getChildren();
                         for (DataSnapshot prescription : prescriptionSnapshot) {
                             Prescription tempPrescription = prescription.getValue( Prescription.class );
                             userPrescriptions.add( tempPrescription );
                         }
-                    }
+                    //}
                 }
                 finishedCallback.callback( userPrescriptions , patientDetails);
             }

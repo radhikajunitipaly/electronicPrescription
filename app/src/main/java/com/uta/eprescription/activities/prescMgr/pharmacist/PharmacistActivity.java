@@ -68,13 +68,20 @@ public class PharmacistActivity extends AppCompatActivity {
         studentNameHeading.setVisibility( View.INVISIBLE );
         studentAgeHeading.setVisibility( View.INVISIBLE );
 
+        Button reset = findViewById(R.id.button_cnl);
+        reset.setOnClickListener((view) -> {
+            studentId.setText("");
+            dob.setText("");
+        });
 
         prescriptionButton.setOnClickListener((view) -> {
             UserDao userDao = new UserDao();
             userDao.getPrescriptionsOfUser(
                     (ArrayList prescriptionListTemp, Map patientDetails) -> {
                         patientDisplayName = patientDetails.get("patientName").toString();
-                        patientDisplayAge = patientDetails.get("patientDob").toString();
+                        String patientDob = patientDetails.get("patientDob").toString();
+                        patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
+                                patientDob.substring(patientDob.length() - 4)));
                         prescriptionList = prescriptionListTemp;
                         recyclerView = findViewById(R.id.recycler_view);
                         recyclerViewAdapter = new RecyclerViewAdapter(

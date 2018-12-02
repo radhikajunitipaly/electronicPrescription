@@ -131,7 +131,7 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
         if(userTypeToEdit.contains("Pharmacist") || userTypeToEdit.contains("Doctor")) {
             editPrescriptionButton.setEnabled(true);
         } else if(userTypeToEdit.contains("Patient")) {
-            editPrescriptionButton.setEnabled(false);
+            editPrescriptionButton.setVisibility(View.INVISIBLE);
         }
         startDateField.setEnabled(false);
         endDateField.setEnabled(false);

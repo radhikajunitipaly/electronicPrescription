@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="sans-serif"
-            android:text="name"
+            android:text="Radhika Junitipaly"
             android:textStyle="bold"
             android:textSize="18dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/welcome_stud"
