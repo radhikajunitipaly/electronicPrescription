@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.uta.eprescription.R;
 import com.uta.eprescription.activities.authenticationMgr.MainActivity;
 import com.uta.eprescription.activities.authenticationMgr.RegisterUserActivity;
+import com.uta.eprescription.activities.prescMgr.patient.PatientActivity;
 import com.uta.eprescription.activities.prescMgr.pharmacist.PharmacistActivity;
 import com.uta.eprescription.dao.dbMgr.RecyclerViewAdapter;
 import com.uta.eprescription.dao.dbMgr.UserDao;
@@ -79,9 +80,24 @@ public class DoctorActivity extends AppCompatActivity {
 
 
         prescriptionButton.setOnClickListener((view) -> {
+            if(studentId.getText().toString().equals( "" )||dob.getText().toString().equals( "" ))
+            {
+                AlertDialog alert = new AlertDialog.Builder(
+                        DoctorActivity.this ).create();
+                alert.setTitle( "Alert" );
+                alert.setMessage( "Please enter Student ID or Date of Birth" );
+                alert.setButton( "OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                } );
+                alert.show();
+
+            }
+            else {
                 UserDao userDao = new UserDao();
                 userDao.getPrescriptionsOfUser(
-                        (ArrayList prescriptionListTemp, Map patientDetails) -> {
+                        (ArrayList prescriptionListTemp, Map patientDetails, boolean success) -> {
+                            if (success) {
                                 patientDisplayName = patientDetails.get("patientName").toString();
                                 String patientDob = patientDetails.get("patientDob").toString();
                                 patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
@@ -97,8 +113,18 @@ public class DoctorActivity extends AppCompatActivity {
                                 recyclerView.setLayoutManager(new LinearLayoutManager(DoctorActivity.this));
                                 studentName.setText(patientDisplayName);
                                 studentAge.setText(patientDisplayAge);
-                        }, studentId.getText().toString(), dob.getText().toString()
-
+                            } else {
+                                    AlertDialog alert = new AlertDialog.Builder(
+                                            DoctorActivity.this ).create();
+                                    alert.setTitle( "Alert" );
+                                    alert.setMessage( "Please enter valid Student ID or Date of Birth" );
+                                    alert.setButton( "OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    } );
+                                    alert.show();
+                                }
+                            }, studentId.getText().toString(), dob.getText().toString()
                     );
                     studentNameHeading.setVisibility( View.VISIBLE );
                     studentAgeHeading.setVisibility( View.VISIBLE );
@@ -106,9 +132,7 @@ public class DoctorActivity extends AppCompatActivity {
                     studentAge.setVisibility( View.VISIBLE );
                 }
         });
-        dob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        dob.setOnClickListener((view ) -> {
                 c = Calendar.getInstance();
                 int day = c.get( Calendar.DAY_OF_MONTH );
                 int mon = c.get( Calendar.MONTH );
@@ -122,9 +146,6 @@ public class DoctorActivity extends AppCompatActivity {
                     }
                 },yr,mon,day);
                 dp.show();
-
-            }
-
         });
 
         CreateNewPresc.setOnClickListener((view) -> {

@@ -90,7 +90,8 @@ public class PatientActivity extends AppCompatActivity {
                                 patientDisplayName = patientDetails.get( "patientName" ).toString();
                                 String patientDob = patientDetails.get("patientDob").toString();
                                 patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
-                                        patientDob.substring(patientDob.length() - 4)));                               prescriptionList = prescriptionListTemp;
+                                        patientDob.substring(patientDob.length() - 4)));
+                                prescriptionList = prescriptionListTemp;
                                 recyclerView = findViewById( R.id.recycler_view );
                                 recyclerViewAdapter = new RecyclerViewAdapter(
                                         PatientActivity.this, prescriptionList,
