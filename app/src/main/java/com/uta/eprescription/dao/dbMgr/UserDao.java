@@ -123,11 +123,12 @@ public class UserDao {
     }
 
     public void updatePrescription(String userId, String pid, Prescription prescription) {
+        databaseReference.keepSynced( true );
         databaseReference.child( userId ).child( "prescriptions" ).child( pid ).setValue( prescription );
     }
 
     public void addPrescription(String userId, String pid, Prescription prescription) {
-
+        databaseReference.keepSynced( true );
         databaseReference.child( userId ).child( "prescriptions" ).child( pid ).setValue( prescription );
     }
 

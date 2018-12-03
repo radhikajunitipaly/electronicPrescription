@@ -1,9 +1,12 @@
 package com.uta.eprescription.activities.authenticationMgr;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.uta.eprescription.R;
+import com.uta.eprescription.activities.prescMgr.common.ViewPrescriptionActivity;
 import com.uta.eprescription.activities.prescMgr.doctor.CreatePrescriptionActivity;
 import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
@@ -54,8 +58,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                        DOB.getText().toString(), prescriptionArrayList);
                UserDao userDao = new UserDao();
                userDao.addUser(user);
-                Toast.makeText(RegisterUserActivity.this,"User Registered",
-                        Toast.LENGTH_LONG).show();
+                showCustomAlert();
                 startActivity(new Intent(RegisterUserActivity.this,
                         MainActivity.class));
             }
@@ -96,5 +99,25 @@ public class RegisterUserActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void showCustomAlert()
+    {
+        Context context = RegisterUserActivity.this;
+        // Create layout inflator object to inflate toast.xml file
+        LayoutInflater inflater = getLayoutInflater();
+
+        // Call toast.xml file for toast layout
+        View toast = inflater.inflate(R.layout.custom_toast_register, null);
+
+        Toast toast1 = new Toast(context);
+
+        // Set layout to toast
+        toast1.setView(toast);
+        //toast1.makeText(context, "Prescription status saved successfully", Toast.LENGTH_LONG);
+        toast1.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM,
+                0, 40);
+        toast1.setDuration(Toast.LENGTH_LONG);
+        toast1.show();
     }
 }

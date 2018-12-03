@@ -70,6 +70,12 @@ public class PharmacistActivity extends AppCompatActivity {
         studentNameHeading.setVisibility( View.INVISIBLE );
         studentAgeHeading.setVisibility( View.INVISIBLE );
 
+        if(getIntent().hasExtra("patientIdFromCreate") && getIntent().hasExtra("dobFromCreate")) {
+            studentId.setText(getIntent().getStringExtra("patientIdFromCreate"));
+            dob.setText(getIntent().getStringExtra("dobFromCreate"));
+            fetchPatient(studentId, dob, studentName, studentAge, studentNameHeading, studentAgeHeading);
+        }
+
         Button reset = findViewById(R.id.button_cnl);
         reset.setOnClickListener((view) -> {
             studentId.setText("");
@@ -78,67 +84,10 @@ public class PharmacistActivity extends AppCompatActivity {
         boolean success;
 
         prescriptionButton.setOnClickListener((view) -> {
-            if(studentId.getText().toString().equals( "" )||dob.getText().toString().equals( "" ))
-            {
-                AlertDialog alert = new AlertDialog.Builder(
-                        PharmacistActivity.this).create();
-                alert.setTitle("Alert");
-                alert.setMessage("Please enter Student ID or Date of Birth");
-                alert.setButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                alert.show();
-            }
-            else
-            {
-                UserDao userDao = new UserDao();
-                userDao.getPrescriptionsOfUser(
-                        (ArrayList prescriptionListTemp, Map patientDetails,boolean sucess) -> {
-                            if(sucess){
-                                patientDisplayName = patientDetails.get("patientName").toString();
-                                String patientDob = patientDetails.get("patientDob").toString();
-                                patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
-                                        patientDob.substring(patientDob.length() - 4)));
-                                prescriptionList = prescriptionListTemp;
-                                recyclerView = findViewById(R.id.recycler_view);
-                                recyclerViewAdapter = new RecyclerViewAdapter(
-                                        PharmacistActivity.this, prescriptionList,
-                                        studentId.getText().toString(), patientDisplayName, patientDisplayAge,
-                                        patientDob, getIntent().getStringExtra("userNameForWelcome"));
-                                recyclerView.setAdapter(recyclerViewAdapter);
-                                recyclerView.addItemDecoration(new DividerItemDecoration(
-                                        PharmacistActivity.this, DividerItemDecoration.VERTICAL));
-                                recyclerView.setLayoutManager(new LinearLayoutManager(PharmacistActivity.this));
-                                studentName.setText(patientDisplayName);
-                                studentAge.setText(patientDisplayAge);
-                            }
-                            else
-                            {
-                                AlertDialog alert = new AlertDialog.Builder(
-                                        PharmacistActivity.this).create();
-                                alert.setTitle("Alert");
-                                alert.setMessage("Please enter Valid student ID or Date of Birth");
-                                alert.setButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                });
-                                alert.show();
-                            }
-
-                        },studentId.getText().toString(), dob.getText().toString()
-                );
-                studentNameHeading.setVisibility( View.VISIBLE );
-                studentAgeHeading.setVisibility( View.VISIBLE );
-                studentName.setVisibility(View.VISIBLE);
-                studentAge.setVisibility(View.VISIBLE);
-
-            }
+            fetchPatient(studentId, dob, studentName, studentAge, studentNameHeading, studentAgeHeading);
 
         });
-        dob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        dob.setOnClickListener((view ) -> {
                 c = Calendar.getInstance();
                 int day = c.get( Calendar.DAY_OF_MONTH );
                 int mon = c.get( Calendar.MONTH );
@@ -152,14 +101,66 @@ public class PharmacistActivity extends AppCompatActivity {
                     }
                 },yr,mon,day );
                 dp.show();
-
-            }
-
         });
 
-        logout.setOnClickListener((view) -> {
-            startActivity(new Intent(PharmacistActivity.this,
-                    MainActivity.class));
-        });
+        logout.setOnClickListener((view) -> startActivity(new Intent(PharmacistActivity.this,
+                MainActivity.class)));
+    }
+
+    private void fetchPatient(EditText studentId, EditText dob, TextView studentName, TextView studentAge, TextView studentNameHeading, TextView studentAgeHeading) {
+        if(studentId.getText().toString().equals( "" )||dob.getText().toString().equals( "" ))
+        {
+            AlertDialog alert = new AlertDialog.Builder(
+                    PharmacistActivity.this).create();
+            alert.setTitle("Alert");
+            alert.setMessage("Please enter Student ID or Date of Birth");
+            alert.setButton("OK", (dialog, which) -> {
+            });
+            alert.show();
+        }
+        else
+        {
+            UserDao userDao = new UserDao();
+            userDao.getPrescriptionsOfUser(
+                    (ArrayList prescriptionListTemp, Map patientDetails, boolean sucess) -> {
+                        if(sucess){
+                            patientDisplayName = patientDetails.get("patientName").toString();
+                            String patientDob = patientDetails.get("patientDob").toString();
+                            patientDisplayAge = String.valueOf(2018 - Integer.parseInt(
+                                    patientDob.substring(patientDob.length() - 4)));
+                            prescriptionList = prescriptionListTemp;
+                            recyclerView = findViewById(R.id.recycler_view);
+                            recyclerViewAdapter = new RecyclerViewAdapter(
+                                    PharmacistActivity.this, prescriptionList,
+                                    studentId.getText().toString(), patientDisplayName, patientDisplayAge,
+                                    patientDob, getIntent().getStringExtra("userNameForWelcome"));
+                            recyclerView.setAdapter(recyclerViewAdapter);
+                            recyclerView.addItemDecoration(new DividerItemDecoration(
+                                    PharmacistActivity.this, DividerItemDecoration.VERTICAL));
+                            recyclerView.setLayoutManager(new LinearLayoutManager(PharmacistActivity.this));
+                            studentName.setText(patientDisplayName);
+                            studentAge.setText(patientDisplayAge);
+                        }
+                        else
+                        {
+                            AlertDialog alert = new AlertDialog.Builder(
+                                    PharmacistActivity.this).create();
+                            alert.setTitle("Alert");
+                            alert.setMessage("Please enter Valid student ID or Date of Birth");
+                            alert.setButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                            alert.show();
+                        }
+
+                    },studentId.getText().toString(), dob.getText().toString()
+            );
+            studentNameHeading.setVisibility( View.VISIBLE );
+            studentAgeHeading.setVisibility( View.VISIBLE );
+            studentName.setVisibility(View.VISIBLE);
+            studentAge.setVisibility(View.VISIBLE);
+
+        }
     }
 }

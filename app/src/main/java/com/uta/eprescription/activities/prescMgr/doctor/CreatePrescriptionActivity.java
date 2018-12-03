@@ -1,9 +1,15 @@
 package com.uta.eprescription.activities.prescMgr.doctor;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -15,6 +21,7 @@ import android.widget.Toast;
 import com.uta.eprescription.R;
 import com.uta.eprescription.activities.authenticationMgr.MainActivity;
 import com.uta.eprescription.activities.authenticationMgr.RegisterUserActivity;
+import com.uta.eprescription.activities.prescMgr.common.ViewPrescriptionActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
 
@@ -88,11 +95,19 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
             dbo.getPrescriptionsOfUserCount( (Long count) -> {
                 count = count+1;
                 pidNew = p+count;
-                Prescription newPrescription = new Prescription(med.getText().toString(),pow.getText().toString(),date.getText().toString(),edate.getText().toString(),countmed.getText().toString(),pidNew,"Valid" );
+                Prescription newPrescription = new Prescription(med.getText().toString(),
+                        pow.getText().toString(),date.getText().toString(),edate.getText().toString(),
+                        countmed.getText().toString(),pidNew,"Valid" );
                 dbo.addPrescription( sid.getText().toString(),pidNew,newPrescription);
             },sid.getText().toString());
-            Toast.makeText(CreatePrescriptionActivity.this,"Prescription created",
-                    Toast.LENGTH_LONG).show();
+
+            /*Toast toast = Toast.makeText(CreatePrescriptionActivity.this, "Created new prescription", Toast.LENGTH_SHORT);
+            TextView v = toast.getView().findViewById(android.R.id.message);
+            v.setBackgroundColor(Color.parseColor("#B0C4DE"));
+            toast.show();*/
+
+            showCustomAlert();
+
             try {
                 Thread.sleep(Toast.LENGTH_LONG);
             } catch (InterruptedException e) {
@@ -105,5 +120,24 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
             intent.putExtra("userNameForWelcome", getIntent().getStringExtra("userNameForWelcome"));
             startActivity(intent);
         });
+    }
+
+    public void showCustomAlert()
+    {
+        Context context = CreatePrescriptionActivity.this;
+        // Create layout inflator object to inflate toast.xml file
+        LayoutInflater inflater = getLayoutInflater();
+
+        // Call toast.xml file for toast layout
+        View toast = inflater.inflate(R.layout.custom_toast_create, null);
+
+        Toast toast1 = new Toast(context);
+
+        // Set layout to toast
+        toast1.setView(toast);
+        toast1.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL,
+                0, 0);
+        toast1.setDuration(Toast.LENGTH_LONG);
+        toast1.show();
     }
 }

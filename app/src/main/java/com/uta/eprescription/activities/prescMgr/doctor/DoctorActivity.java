@@ -110,10 +110,8 @@ public class DoctorActivity extends AppCompatActivity {
                         DoctorActivity.this ).create();
                 alert.setTitle( "Alert" );
                 alert.setMessage( "Fetch Student record to create prescription" );
-                alert.setButton( "OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                } );
+                alert.setButton( "OK", (dialog, which) -> {
+                });
                 alert.show();
 
             }
@@ -139,10 +137,8 @@ public class DoctorActivity extends AppCompatActivity {
                     DoctorActivity.this ).create();
             alert.setTitle( "Alert" );
             alert.setMessage( "Please enter Student ID and Date of Birth" );
-            alert.setButton( "OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            } );
+            alert.setButton( "OK", (dialog, which) -> {
+            });
             alert.show();
 
         }

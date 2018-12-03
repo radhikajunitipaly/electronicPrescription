@@ -24,10 +24,13 @@
         <activity android:name=".activities.prescMgr.pharmacist.PharmacistActivity" />
         <activity android:name=".activities.prescMgr.patient.PatientActivity" />
         <activity android:name=".activities.authenticationMgr.RegisterUserActivity" />
-        <activity
-            android:name=".activities.prescMgr.common.ViewPrescriptionActivity"/>
+        <activity android:name=".activities.prescMgr.common.ViewPrescriptionActivity" />
         <activity android:name=".activities.prescMgr.doctor.CreatePrescriptionActivity" />
-        <activity android:name=".activities.authenticationMgr.ReviewAccount"></activity>
+        <activity android:name=".activities.authenticationMgr.ReviewAccount" />
+        <activity
+            android:name=".activities.prescMgr.displayToast"
+            android:label="@string/title_activity_display_toast"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

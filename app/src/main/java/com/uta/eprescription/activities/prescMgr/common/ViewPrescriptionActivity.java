@@ -1,10 +1,14 @@
 package com.uta.eprescription.activities.prescMgr.common;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -104,34 +108,30 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
             status = statusField.getSelectedItem().toString();
             displayPrescription();
 
-            Toast toast = Toast.makeText(ViewPrescriptionActivity.this, "Prescription Saved", Toast.LENGTH_SHORT);
+            /*Toast toast = Toast.makeText(ViewPrescriptionActivity.this, "Prescription Saved",
+                    Toast.LENGTH_SHORT);
             TextView v = toast.getView().findViewById(android.R.id.message);
-            v.setBackgroundColor(Color.parseColor("#B0C4DE"));
-            toast.show();
+            v.setTextColor(Color.BLACK);
+            toast.show();*/
 
-            /*Toast.makeText(ViewPrescriptionActivity.this,"Prescription Saved",
-                    Toast.LENGTH_LONG).show();*/
+            showCustomAlert();
+
+            try {
+                Thread.sleep(Toast.LENGTH_LONG);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             if (userTypeToEdit.contains("Pharmacist")) {
                 Intent intent = new Intent(ViewPrescriptionActivity.this,
                         PharmacistActivity.class);
-                try {
-                    Thread.sleep(Toast.LENGTH_LONG);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 intent.putExtra("patientIdFromCreate", getIntent().getStringExtra("userId"));
                 intent.putExtra("dobFromCreate", getIntent().getStringExtra("userDob"));
                 intent.putExtra("userNameForWelcome", getIntent().getStringExtra("userNameForWelcome"));
                 startActivity(intent);
-            } else if (userTypeToEdit.contains("Doctor")) {
+             } else if (userTypeToEdit.contains("Doctor")) {
                 Intent intent = new Intent(ViewPrescriptionActivity.this,
                         DoctorActivity.class);
-                try {
-                    Thread.sleep(Toast.LENGTH_LONG);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 intent.putExtra("patientIdFromCreate", getIntent().getStringExtra("userId"));
                 intent.putExtra("dobFromCreate", getIntent().getStringExtra("userDob"));
                 intent.putExtra("userNameForWelcome", getIntent().getStringExtra("userNameForWelcome"));
@@ -202,5 +202,25 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
             editPrescriptionButton.setVisibility(View.INVISIBLE);
         }
 
+    }
+
+    public void showCustomAlert()
+    {
+        Context context = ViewPrescriptionActivity.this;
+        // Create layout inflator object to inflate toast.xml file
+        LayoutInflater inflater = getLayoutInflater();
+
+             // Call toast.xml file for toast layout
+        View toast = inflater.inflate(R.layout.custom_toast, null);
+
+        Toast toast1 = new Toast(context);
+
+        // Set layout to toast
+        toast1.setView(toast);
+        //toast1.makeText(context, "Prescription status saved successfully", Toast.LENGTH_LONG);
+        toast1.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL,
+                0, 0);
+        toast1.setDuration(Toast.LENGTH_LONG);
+        toast1.show();
     }
 }
