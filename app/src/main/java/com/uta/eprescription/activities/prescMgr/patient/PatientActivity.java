@@ -52,6 +52,11 @@ public class PatientActivity extends AppCompatActivity {
             userNameForWelcome.setText(getIntent().getStringExtra("userNameForWelcome"));
         }
 
+        if(getIntent().hasExtra("studentIdDefault")) {
+            studentId.setText(getIntent().getStringExtra("studentIdDefault"));
+            studentId.setEnabled(false);
+        }
+
         TextView studentName = findViewById(R.id.student_name_view);
         TextView studentAge = findViewById(R.id.student_age_view);
         studentName.setVisibility( View.INVISIBLE );
@@ -95,7 +100,8 @@ public class PatientActivity extends AppCompatActivity {
                                 recyclerView = findViewById( R.id.recycler_view );
                                 recyclerViewAdapter = new RecyclerViewAdapter(
                                         PatientActivity.this, prescriptionList,
-                                        studentId.getText().toString(), patientDisplayName, patientDisplayAge, patientDob );
+                                        studentId.getText().toString(), patientDisplayName, patientDisplayAge,
+                                        patientDob, getIntent().getStringExtra("userNameForWelcome") );
                                 recyclerView.setAdapter( recyclerViewAdapter );
                                 recyclerView.addItemDecoration( new DividerItemDecoration(
                                         PatientActivity.this, DividerItemDecoration.VERTICAL ) );

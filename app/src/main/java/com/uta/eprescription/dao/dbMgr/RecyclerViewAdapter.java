@@ -25,6 +25,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private String mUserName;
     private String mUserAge;
     private String mUserDob;
+    private String mDoctorName;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private AdapterView.OnItemLongClickListener mLongClickListener;
@@ -34,7 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // data is passed into the constructor
     public RecyclerViewAdapter(Context context, ArrayList<Prescription> data, String userId,
-                               String userName, String userAge, String userDob) {
+                               String userName, String userAge, String userDob, String doctorName) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.mContext = context;
@@ -42,6 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mUserName= userName;
         this.mUserAge= userAge;
         this.mUserDob= userDob;
+        this.mDoctorName = doctorName;
     }
 
     // inflates the row layout from xml when needed
@@ -62,6 +64,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Intent intent = new Intent(mContext, ViewPrescriptionActivity.class);
             intent.putExtra("pid", entry.getPid());
             intent.putExtra("userId", mUserId);
+            intent.putExtra("userNameForWelcome", mDoctorName);
             intent.putExtra("userName", mUserName);
             intent.putExtra("userDob", mUserDob);
             intent.putExtra("userAge", mUserAge);

@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                                 case "Student":
                                     intent = new Intent(MainActivity.this,
                                             PatientActivity.class);
+                                    intent.putExtra("studentIdDefault", userIdField.getText().toString());
                                     intent.putExtra("userNameForWelcome", userName);
                                     startActivity(intent);
                                     break;

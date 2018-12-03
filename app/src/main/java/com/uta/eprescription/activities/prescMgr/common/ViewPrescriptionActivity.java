@@ -1,6 +1,7 @@
 package com.uta.eprescription.activities.prescMgr.common;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,11 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uta.eprescription.R;
-import com.uta.eprescription.activities.prescMgr.doctor.CreatePrescriptionActivity;
 import com.uta.eprescription.activities.prescMgr.doctor.DoctorActivity;
+import com.uta.eprescription.activities.prescMgr.pharmacist.PharmacistActivity;
 import com.uta.eprescription.dao.dbMgr.UserDao;
 import com.uta.eprescription.models.Prescription;
-import com.uta.eprescription.models.User;
 
 public class ViewPrescriptionActivity extends AppCompatActivity {
 
@@ -28,6 +28,7 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
     Spinner statusField;
     Button editPrescriptionButton;
     Button saveButton;
+    TextView viewPrescriptionHeading;
 
     String status;
     String medicine;
@@ -48,6 +49,7 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
         countField = findViewById(R.id.textView_dat_medcnt);
         powerField = findViewById(R.id.textView_dat_pwr);
         statusField = findViewById(R.id.spinner_vw_status);
+        viewPrescriptionHeading = findViewById(R.id.textView_vwpres);
         saveButton = findViewById( R.id.button_save );
         saveButton.setVisibility( View.INVISIBLE );
 
@@ -67,9 +69,6 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
         if(getIntent().hasExtra("userAge")) {
             studentAge.setText(getIntent().getStringExtra("userAge"));
         }
-
-
-
         editPrescriptionButton.setOnClickListener((view) -> {
             editPrescriptionButton.setVisibility( View.INVISIBLE );
             saveButton.setVisibility( View.VISIBLE );
@@ -81,9 +80,12 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
                     medicineField.setEnabled(true);
                     endDateField.setEnabled(true);
                     startDateField.setEnabled(true);
+                    viewPrescriptionHeading.setText("Edit Prescription");
+
                 }
                 if (userTypeToEdit.contains("Pharmacist") && status.equals("Valid")) {
                     statusField.setEnabled(true);
+                    viewPrescriptionHeading.setText("Edit Prescription");
                 }
         });
 
@@ -101,13 +103,40 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
             power = powerField.getText().toString();
             status = statusField.getSelectedItem().toString();
             displayPrescription();
-            Toast.makeText(ViewPrescriptionActivity.this,"Prescription Saved",
-                    Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(ViewPrescriptionActivity.this,
-                    DoctorActivity.class);
-            intent.putExtra("patientIdFromCreate", getIntent().getStringExtra("userId"));
-            intent.putExtra("dobFromCreate", getIntent().getStringExtra("userDob"));
-            startActivity(intent);
+
+            Toast toast = Toast.makeText(ViewPrescriptionActivity.this, "Prescription Saved", Toast.LENGTH_SHORT);
+            TextView v = toast.getView().findViewById(android.R.id.message);
+            v.setBackgroundColor(Color.parseColor("#B0C4DE"));
+            toast.show();
+
+            /*Toast.makeText(ViewPrescriptionActivity.this,"Prescription Saved",
+                    Toast.LENGTH_LONG).show();*/
+
+            if (userTypeToEdit.contains("Pharmacist")) {
+                Intent intent = new Intent(ViewPrescriptionActivity.this,
+                        PharmacistActivity.class);
+                try {
+                    Thread.sleep(Toast.LENGTH_LONG);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                intent.putExtra("patientIdFromCreate", getIntent().getStringExtra("userId"));
+                intent.putExtra("dobFromCreate", getIntent().getStringExtra("userDob"));
+                intent.putExtra("userNameForWelcome", getIntent().getStringExtra("userNameForWelcome"));
+                startActivity(intent);
+            } else if (userTypeToEdit.contains("Doctor")) {
+                Intent intent = new Intent(ViewPrescriptionActivity.this,
+                        DoctorActivity.class);
+                try {
+                    Thread.sleep(Toast.LENGTH_LONG);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                intent.putExtra("patientIdFromCreate", getIntent().getStringExtra("userId"));
+                intent.putExtra("dobFromCreate", getIntent().getStringExtra("userDob"));
+                intent.putExtra("userNameForWelcome", getIntent().getStringExtra("userNameForWelcome"));
+                startActivity(intent);
+            }
         });
     }
 
@@ -134,12 +163,7 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
     private void displayPrescription() {
 
         editPrescriptionButton.setVisibility( View.VISIBLE );
-        saveButton.setVisibility( View.INVISIBLE );
-        if(userTypeToEdit.contains("Pharmacist") || userTypeToEdit.contains("Doctor")) {
-            editPrescriptionButton.setEnabled(true);
-        } else if(userTypeToEdit.contains("Patient")) {
-            editPrescriptionButton.setVisibility(View.INVISIBLE);
-        }
+
         startDateField.setEnabled(false);
         endDateField.setEnabled(false);
         medicineField.setEnabled(false);
@@ -164,6 +188,19 @@ public class ViewPrescriptionActivity extends AppCompatActivity {
         }
         if(statusValue != -1)
             statusField.setSelection(statusValue);
+
+        saveButton.setVisibility( View.INVISIBLE );
+        if(userTypeToEdit.contains("Doctor")) {
+            editPrescriptionButton.setEnabled(true);
+        } else if (userTypeToEdit.contains("Pharmacist")) {
+             if(!status.equals("Valid"))
+                editPrescriptionButton.setVisibility(View.INVISIBLE);
+             else
+                 editPrescriptionButton.setEnabled(true);
+        }
+        else if(userTypeToEdit.contains("Patient")) {
+            editPrescriptionButton.setVisibility(View.INVISIBLE);
+        }
 
     }
 }

@@ -13,10 +13,8 @@ import com.uta.eprescription.models.Prescription;
 import com.uta.eprescription.models.User;
 import com.uta.eprescription.activities.prescMgr.doctor.PrescriptionCountCall;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class UserDao {
     // for data persistence
@@ -68,6 +66,7 @@ public class UserDao {
 
     public void getPrescriptionsOfUser(@NonNull final PrescriptionListCallback<ArrayList> finishedCallback,
                                        final String userId, final String dob) {
+        databaseReference.keepSynced( true );
         databaseReference.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -103,6 +102,7 @@ public class UserDao {
 
     public void getPrescriptionsOfUserCount(@NonNull final PrescriptionCountCall<Long> finishedCallback,
                                             final String userId) {
+        databaseReference.keepSynced( true );
         databaseReference.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

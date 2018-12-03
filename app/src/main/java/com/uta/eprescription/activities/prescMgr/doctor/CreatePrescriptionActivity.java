@@ -93,10 +93,16 @@ public class CreatePrescriptionActivity extends AppCompatActivity {
             },sid.getText().toString());
             Toast.makeText(CreatePrescriptionActivity.this,"Prescription created",
                     Toast.LENGTH_LONG).show();
+            try {
+                Thread.sleep(Toast.LENGTH_LONG);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Intent intent = new Intent(CreatePrescriptionActivity.this,
                     DoctorActivity.class);
             intent.putExtra("patientIdFromCreate", getIntent().getStringExtra("patientId"));
             intent.putExtra("dobFromCreate", getIntent().getStringExtra("patientDob"));
+            intent.putExtra("userNameForWelcome", getIntent().getStringExtra("userNameForWelcome"));
             startActivity(intent);
         });
     }

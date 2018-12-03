@@ -15,7 +15,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="100dp"
-        android:text="Edit Prescription"
+        android:text="View Prescription"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

@@ -46,7 +46,7 @@ public class DoctorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_page);
         relativeLayout= findViewById(R.id.main_layout_doctor);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Button CreateNewPresc = (Button)findViewById( R.id.button_create );
         ImageButton logout = (ImageButton)findViewById( R.id.imageButton );
 
@@ -104,12 +104,26 @@ public class DoctorActivity extends AppCompatActivity {
         });
 
         CreateNewPresc.setOnClickListener((view) -> {
+            if(studentId.getText().toString().equals( "" ) || dob.getText().toString().equals( "" ))
+            {
+                AlertDialog alert = new AlertDialog.Builder(
+                        DoctorActivity.this ).create();
+                alert.setTitle( "Alert" );
+                alert.setMessage( "Fetch Student record to create prescription" );
+                alert.setButton( "OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                } );
+                alert.show();
+
+            }
             Intent intent = new Intent(DoctorActivity.this,
                     CreatePrescriptionActivity.class);
             intent.putExtra("patientId", studentId.getText().toString());
             intent.putExtra("patientName", patientDisplayName);
             intent.putExtra("patientAge", patientDisplayAge);
             intent.putExtra("patientDob", dob.getText().toString());
+            intent.putExtra("userNameForWelcome", getIntent().getStringExtra("userNameForWelcome"));
             startActivity(intent);
         });
         logout.setOnClickListener((view) -> {
@@ -124,7 +138,7 @@ public class DoctorActivity extends AppCompatActivity {
             AlertDialog alert = new AlertDialog.Builder(
                     DoctorActivity.this ).create();
             alert.setTitle( "Alert" );
-            alert.setMessage( "Please enter Student ID or Date of Birth" );
+            alert.setMessage( "Please enter Student ID and Date of Birth" );
             alert.setButton( "OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                 }
@@ -145,7 +159,8 @@ public class DoctorActivity extends AppCompatActivity {
                             recyclerView = findViewById(R.id.recycler_view);
                             recyclerViewAdapter = new RecyclerViewAdapter(
                                     DoctorActivity.this, prescriptionList,
-                                    studentId.getText().toString(), patientDisplayName, patientDisplayAge, patientDob);
+                                    studentId.getText().toString(), patientDisplayName, patientDisplayAge, patientDob,
+                                    getIntent().getStringExtra("userNameForWelcome"));
                             recyclerView.setAdapter(recyclerViewAdapter);
                             recyclerView.addItemDecoration(new DividerItemDecoration(DoctorActivity.this,
                                     DividerItemDecoration.VERTICAL));
@@ -156,7 +171,7 @@ public class DoctorActivity extends AppCompatActivity {
                                 AlertDialog alert = new AlertDialog.Builder(
                                         DoctorActivity.this ).create();
                                 alert.setTitle( "Alert" );
-                                alert.setMessage( "Please enter valid Student ID or Date of Birth" );
+                                alert.setMessage( "Please enter valid Student ID and Date of Birth" );
                                 alert.setButton( "OK", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                     }
